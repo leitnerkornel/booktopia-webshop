@@ -65,3 +65,11 @@ img {
     height: 250px;
     width: 150px;
 }
+
+.card-header {
+    height: 100px;
+}
+
+.card-description {
+    height: 200px;
+}
