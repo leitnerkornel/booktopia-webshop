@@ -1,6 +1,6 @@
 package com.codecool.shop.dao;
 
-import com.codecool.shop.model.Publisher;
+import com.codecool.shop.model.Recommender;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.Genre;
 
@@ -13,7 +13,7 @@ public interface ProductDao {
     void remove(int id);
 
     List<Product> getAll();
-    List<Product> getBy(Publisher publisher);
+    List<Product> getBy(Recommender recommender);
     List<Product> getBy(Genre genre);
 
 }

@@ -1,14 +1,14 @@
 package com.codecool.shop.dao.implementation;
 
 import com.codecool.shop.dao.PublisherDao;
-import com.codecool.shop.model.Publisher;
+import com.codecool.shop.model.Recommender;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PublisherDaoMem implements PublisherDao {
 
-    private List<Publisher> data = new ArrayList<>();
+    private List<Recommender> data = new ArrayList<>();
     private static PublisherDaoMem instance = null;
 
     /* A private Constructor prevents any other class from instantiating.
@@ -24,13 +24,13 @@ public class PublisherDaoMem implements PublisherDao {
     }
 
     @Override
-    public void add(Publisher publisher) {
-        publisher.setId(data.size() + 1);
-        data.add(publisher);
+    public void add(Recommender recommender) {
+        recommender.setId(data.size() + 1);
+        data.add(recommender);
     }
 
     @Override
-    public Publisher find(int id) {
+    public Recommender find(int id) {
         return data.stream().filter(t -> t.getId() == id).findFirst().orElse(null);
     }
 
@@ -40,7 +40,7 @@ public class PublisherDaoMem implements PublisherDao {
     }
 
     @Override
-    public List<Publisher> getAll() {
+    public List<Recommender> getAll() {
         return data;
     }
 }

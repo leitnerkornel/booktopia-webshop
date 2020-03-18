@@ -4,7 +4,7 @@ package com.codecool.shop.dao.implementation;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.Genre;
-import com.codecool.shop.model.Publisher;
+import com.codecool.shop.model.Recommender;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,8 +49,8 @@ public class ProductDaoMem implements ProductDao {
     }
 
     @Override
-    public List<Product> getBy(Publisher publisher) {
-        return data.stream().filter(t -> t.getPublisher().equals(publisher)).collect(Collectors.toList());
+    public List<Product> getBy(Recommender recommender) {
+        return data.stream().filter(t -> t.getRecommender().equals(recommender)).collect(Collectors.toList());
     }
 
     @Override

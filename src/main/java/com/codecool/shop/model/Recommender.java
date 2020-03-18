@@ -3,10 +3,10 @@ package com.codecool.shop.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Publisher extends BaseModel {
+public class Recommender extends BaseModel {
     private List<Product> products;
 
-    public Publisher(String name, String description) {
+    public Recommender(String name, String description) {
         super(name);
         this.products = new ArrayList<>();
     }

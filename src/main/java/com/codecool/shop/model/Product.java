@@ -7,13 +7,13 @@ public class Product extends BaseModel {
     private float defaultPrice;
     private Currency defaultCurrency;
     private Genre genre;
-    private Publisher publisher;
+    private Recommender recommender;
 
 
-    public Product(String name, float defaultPrice, String currencyString, String description, Genre genre, Publisher publisher) {
+    public Product(String name, float defaultPrice, String currencyString, String description, Genre genre, Recommender recommender) {
         super(name, description);
         this.setPrice(defaultPrice, currencyString);
-        this.setPublisher(publisher);
+        this.setRecommender(recommender);
         this.setGenre(genre);
     }
 
@@ -51,13 +51,13 @@ public class Product extends BaseModel {
         this.genre.addProduct(this);
     }
 
-    public Publisher getPublisher() {
-        return publisher;
+    public Recommender getRecommender() {
+        return recommender;
     }
 
-    public void setPublisher(Publisher publisher) {
-        this.publisher = publisher;
-        this.publisher.addProduct(this);
+    public void setRecommender(Recommender recommender) {
+        this.recommender = recommender;
+        this.recommender.addProduct(this);
     }
 
     @Override
@@ -73,6 +73,6 @@ public class Product extends BaseModel {
                 this.defaultPrice,
                 this.defaultCurrency.toString(),
                 this.genre.getName(),
-                this.publisher.getName());
+                this.recommender.getName());
     }
 }

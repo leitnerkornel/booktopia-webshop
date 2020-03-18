@@ -1,14 +1,14 @@
 package com.codecool.shop.dao;
 
-import com.codecool.shop.model.Publisher;
+import com.codecool.shop.model.Recommender;
 
 import java.util.List;
 
 public interface PublisherDao {
 
-    void add(Publisher publisher);
-    Publisher find(int id);
+    void add(Recommender recommender);
+    Recommender find(int id);
     void remove(int id);
 
-    List<Publisher> getAll();
+    List<Recommender> getAll();
 }
