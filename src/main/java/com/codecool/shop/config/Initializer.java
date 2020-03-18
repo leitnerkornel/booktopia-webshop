@@ -35,11 +35,11 @@ public class Initializer implements ServletContextListener {
 
         //setting up products and printing it
         // Peti's books
-        productDataStore.add(new Product("The diving bell and the butterfly", 49.9f, "USD", "", tablet, amazon));
-        productDataStore.add(new Product("The troop", 49.9f, "USD", "", tablet, amazon));
-        productDataStore.add(new Product("Player piano", 49.9f, "USD", "", tablet, amazon));
-        productDataStore.add(new Product("Homeland", 49.9f, "USD", "", tablet, amazon));
-        productDataStore.add(new Product("A scanner darkly", 49.9f, "USD", "", tablet, amazon));
+        productDataStore.add(new Product("The diving bell and the butterfly", 49.9f, "USD", "The Diving Bell and the Butterfly is a memoir by journalist Jean-Dominique Bauby. It describes his life before and after suffering a massive stroke that left him with locked-in syndrome.", tablet, amazon));
+        productDataStore.add(new Product("The troop", 49.9f, "USD", "Once a year, scoutmaster Tim Riggs leads a troop of boys into the Canadian wilderness for a three-day camping trip - tradition as comforting and reliable as a good ghost story and a roaring bonfire. But when an unexpected intruder - shockingly thin, disturbingly pale, and voraciously hungry - stumbles upon their campsite, Tim and the boys are exposed to something far more frightening than any tale of terror. The human carrier of a bioengineered nightmare. An inexplicable horror that spreads faster than fear. A harrowing struggle for survival that will pit the troop against the elements, the infected ... and one another.", tablet, amazon));
+        productDataStore.add(new Product("Player piano", 49.9f, "USD", "The story takes place in a near-future society that is almost totally mechanized, eliminating the need for human laborers. The widespread mechanization creates conflict between the wealthy upper class, the engineers and managers, who keep society running, and the lower class, whose skills and purpose in society have been replaced by machines. The book uses irony and sentimentality, which were to become hallmarks developed further in Vonnegut's later works", tablet, amazon));
+        productDataStore.add(new Product("Homeland", 49.9f, "USD", "The young prince of a royal house, Drizzt grows to maturity in the vile world of his dark kin. Possessing honor beyond the scope of his unprincipled society, young Drizzt faces an inevitable dilemma. Can he live in a world that rejects integrity?", tablet, amazon));
+        productDataStore.add(new Product("A scanner darkly", 49.9f, "USD", "Substance D – otherwise known as Death – is the most dangerous drug ever to find its way onto the black market. It destroys the links between the brain's two hemispheres, leading first to disorentation and then to complete and irreversible brain damage. Bob Arctor, undercover narcotics agent, is trying to find a lead to the source of supply, but to pass as an addict he must become a user, and soon, without knowing what is happening to him, he is as dependent as any of the addicts he is monitoring.", tablet, amazon));
 
         // Kornel's books
         productDataStore.add(new Product("The Snowman", 11.33f, "USD", "The night the first snow falls a young boy wakes to find his mother gone.", tablet, amazon));
