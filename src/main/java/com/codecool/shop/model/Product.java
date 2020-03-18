@@ -6,15 +6,15 @@ public class Product extends BaseModel {
 
     private float defaultPrice;
     private Currency defaultCurrency;
-    private ProductCategory productCategory;
-    private Supplier supplier;
+    private Genre genre;
+    private Publisher publisher;
 
 
-    public Product(String name, float defaultPrice, String currencyString, String description, ProductCategory productCategory, Supplier supplier) {
+    public Product(String name, float defaultPrice, String currencyString, String description, Genre genre, Publisher publisher) {
         super(name, description);
         this.setPrice(defaultPrice, currencyString);
-        this.setSupplier(supplier);
-        this.setProductCategory(productCategory);
+        this.setPublisher(publisher);
+        this.setGenre(genre);
     }
 
     public float getDefaultPrice() {
@@ -42,22 +42,22 @@ public class Product extends BaseModel {
         this.defaultCurrency = Currency.getInstance(currency);
     }
 
-    public ProductCategory getProductCategory() {
-        return productCategory;
+    public Genre getGenre() {
+        return genre;
     }
 
-    public void setProductCategory(ProductCategory productCategory) {
-        this.productCategory = productCategory;
-        this.productCategory.addProduct(this);
+    public void setGenre(Genre genre) {
+        this.genre = genre;
+        this.genre.addProduct(this);
     }
 
-    public Supplier getSupplier() {
-        return supplier;
+    public Publisher getPublisher() {
+        return publisher;
     }
 
-    public void setSupplier(Supplier supplier) {
-        this.supplier = supplier;
-        this.supplier.addProduct(this);
+    public void setPublisher(Publisher publisher) {
+        this.publisher = publisher;
+        this.publisher.addProduct(this);
     }
 
     @Override
@@ -72,7 +72,7 @@ public class Product extends BaseModel {
                 this.name,
                 this.defaultPrice,
                 this.defaultCurrency.toString(),
-                this.productCategory.getName(),
-                this.supplier.getName());
+                this.genre.getName(),
+                this.publisher.getName());
     }
 }
