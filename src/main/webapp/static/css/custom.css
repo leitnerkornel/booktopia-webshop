@@ -62,7 +62,7 @@ img {
     height: 240px;
     width: 180px;
     margin: auto;
-    padding: 2px;
+    border: 3px burlywood solid;
 }
 
 .card {
