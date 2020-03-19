@@ -71,7 +71,6 @@
 }
 
 
-
 .card {
     margin: 15px;
     border: none;
@@ -146,11 +145,32 @@
 
 }
 
-.btn-success {
+.add-to-cart {
     background: saddlebrown;
     border: none;
+    box-shadow: none;
     margin: auto;
 }
+
+/*.add-to-cart:active {
+    border: none;
+    box-shadow: none;
+    outline: none;
+    color: white;
+}
+
+.add-to-cart:focus {
+    border: none;
+    box-shadow: none;
+    color: white;
+}
+
+.add-to-cart:hover {
+    border: none;
+    box-shadow: none;
+    color: white;
+}*/
+
 .footer {
     margin-top: 20px;
     text-align: center;
@@ -175,7 +195,7 @@
 }
 
 .nav-link dropdown-toggle {
-    color:antiquewhite;
+    color: antiquewhite;
 }
 
 .centered {
@@ -209,6 +229,7 @@
 .badge-warning[href] {
     background-color: darkblue;
 }
+
 #lblCartCount {
     font-size: 12px;
     background: white;
