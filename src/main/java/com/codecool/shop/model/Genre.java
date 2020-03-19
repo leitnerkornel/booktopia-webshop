@@ -7,18 +7,9 @@ public class Genre extends BaseModel {
     private String department;
     private List<Product> products;
 
-    public Genre(String name, String department, String description) {
+    public Genre(String name) {
         super(name);
-        this.department = department;
         this.products = new ArrayList<>();
-    }
-
-    public String getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(String department) {
-        this.department = department;
     }
 
     public void setProducts(ArrayList<Product> products) {
