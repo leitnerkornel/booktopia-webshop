@@ -243,5 +243,7 @@
     margin-right: 10px;
 }
 
-
+.not-selected {
+    display: none;
+}
 

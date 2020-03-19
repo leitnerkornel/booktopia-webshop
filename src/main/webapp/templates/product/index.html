@@ -89,7 +89,7 @@
 <div class="container">
     <div id="products" class="row">
         <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">
-            <div class="card">
+            <div class="card not-selected" th:attr="class='card ' + ${prod.recommender.getName()}">
                 <img class="book-image" src="http://placehold.it/400x250/000/fff"
                      th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt=""/>
                 <div class="card-header">

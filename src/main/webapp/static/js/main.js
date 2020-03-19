@@ -1,9 +1,32 @@
 let filterByRecommender = function () {
     let filterRecommenderButtons = document.querySelectorAll('.drop-recommender');
+    let cards = document.querySelectorAll(".card");
     for (let button of filterRecommenderButtons) {
         button.addEventListener("click", function () {
             if (button.innerHTML === "Kornel") {
-                console.log("Kornel");
+                for (let card of cards) {
+                    if (!card.classList.contains("Kornel")) {
+                        card.classList.add("not-selected");
+                    } else {
+                        card.classList.remove("not-selected");
+                    }
+                }
+            } else if (button.innerHTML === "Peti") {
+                for (let card of cards) {
+                    if (!card.classList.contains("Peti")) {
+                        card.classList.add("not-selected");
+                    } else {
+                        card.classList.remove("not-selected");
+                    }
+                }
+            } else if (button.innerHTML === "Gabor") {
+                for (let card of cards) {
+                    if (!card.classList.contains("Gabor")) {
+                        card.classList.add("not-selected");
+                    } else {
+                        card.classList.remove("not-selected");
+                    }
+                }
             }
         })
     }

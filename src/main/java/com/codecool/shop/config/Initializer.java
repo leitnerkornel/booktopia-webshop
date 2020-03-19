@@ -25,11 +25,11 @@ public class Initializer implements ServletContextListener {
         PublisherDao supplierDataStore = PublisherDaoMem.getInstance();
 
         //setting up a new Recommender
-        Recommender peti = new Recommender("Péter Borók", "Book specialist from Codecool.");
+        Recommender peti = new Recommender("Peti", "Book specialist from Codecool.");
         supplierDataStore.add(peti);
-        Recommender kornel = new Recommender("Kornél Leitner", "Book specialist from Codecool.");
+        Recommender kornel = new Recommender("Kornel", "Book specialist from Codecool.");
         supplierDataStore.add(kornel);
-        Recommender gabor = new Recommender("Gábor Jalsovszky", "Book specialist from Codecool.");
+        Recommender gabor = new Recommender("Gabor", "Book specialist from Codecool.");
         supplierDataStore.add(gabor);
 
         //setting up authors
@@ -50,7 +50,7 @@ public class Initializer implements ServletContextListener {
         Author richardScarry = new Author("Richard Scarry");
 
         //setting up a new product category
-        Genre tablet = new Genre("Tablet", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
+        Genre tablet = new Genre("Thriller", "Hardware", "A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
         productCategoryDataStore.add(tablet);
 
         //setting up products and printing it
