@@ -9,19 +9,35 @@ let filterByRecommender = function () {
     }
 };
 
-let increaseCartCount = function () {
+let increaseCartCount = function (author, title, price) {
     let counter = document.querySelector("#lblCartCount");
     let currentValue = parseInt(counter.innerHTML);
-    console.log(currentValue);
+    if (currentValue === 0) {
+        let cart = document.querySelector(".items-in-cart");
+        cart.querySelector(".empty-cart-text").remove();
+    }
     currentValue += 1;
     counter.innerHTML = currentValue.toString();
+    showInCart(author, title, price);
     changeCartColor(currentValue);
+};
+
+let showInCart = function (author, title, price) {
+    let cart = document.querySelector(".items-in-cart");
+    let newElement = document.createElement("p");
+    newElement.innerHTML = `${author} - ${title} - ${price}`;
+    cart.appendChild(newElement);
 };
 
 let addToCart = function () {
     let buttons = document.querySelectorAll(".add-to-cart");
     for (let button of buttons) {
-        button.addEventListener("click", increaseCartCount);
+        let author = button.dataset.author;
+        let title = button.dataset.title;
+        let price = button.dataset.price;
+        button.addEventListener("click", function () {
+            increaseCartCount(author, title, price);
+        });
     }
 };
 
@@ -34,8 +50,8 @@ let changeCartColor = function (value) {
     }
 };
 
-
 const main = function () {
+
     addToCart();
     filterByRecommender();
 };
