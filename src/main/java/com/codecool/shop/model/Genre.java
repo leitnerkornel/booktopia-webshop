@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Genre extends BaseModel {
-    private String department;
     private List<Product> products;
 
     public Genre(String name) {
@@ -31,8 +30,6 @@ public class Genre extends BaseModel {
                         "department: %3$s, " +
                         "description: %4$s",
                 this.id,
-                this.name,
-                this.department,
-                this.description);
+                this.name);
     }
 }

@@ -57,11 +57,10 @@
                     Filter by Genre
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownGenre">
-                    <a class="dropdown-item drop-genre" href="#">Adventure</a>
+                    <a class="dropdown-item drop-genre" href="#">Thriller</a>
                     <a class="dropdown-item drop-genre" href="#">Fantasy</a>
-                    <a class="dropdown-item drop-genre" href="#">Sci-fi</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">...</a>
+                    <a class="dropdown-item drop-genre" href="#">Satire</a>
+                    <a class="dropdown-item drop-genre" href="#">Children's book</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -89,7 +88,7 @@
 <div class="container">
     <div id="products" class="row">
         <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">
-            <div class="card not-selected" th:attr="class='card ' + ${prod.recommender.getName()}">
+            <div class="card not-selected" th:attr="class='card ' + ${prod.recommender.getName()} + ' ' + ${prod.genre.getName()}">
                 <img class="book-image" src="http://placehold.it/400x250/000/fff"
                      th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt=""/>
                 <div class="card-header">
