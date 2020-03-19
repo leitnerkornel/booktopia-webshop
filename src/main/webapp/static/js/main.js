@@ -15,12 +15,22 @@ let increaseCartCount = function () {
     console.log(currentValue);
     currentValue += 1;
     counter.innerHTML = currentValue.toString();
+    changeCartColor(currentValue);
 };
 
 let addToCart = function () {
     let buttons = document.querySelectorAll(".add-to-cart");
     for (let button of buttons) {
         button.addEventListener("click", increaseCartCount);
+    }
+};
+
+let changeCartColor = function (value) {
+    let cartIcon = document.querySelector(".fa-shopping-cart");
+    if (value > 0) {
+        cartIcon.classList.add('cart-color-change');
+    } else {
+        cartIcon.classList.remove('cart-color-change');
     }
 };
 
