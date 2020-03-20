@@ -27,6 +27,10 @@ let filterByRecommender = function () {
                         card.classList.remove("not-selected");
                     }
                 }
+            } else {
+                for (let card of cards) {
+                    card.classList.remove("not-selected");
+                }
             }
         })
     }
@@ -55,7 +59,7 @@ let filterByGenre = function () {
                 }
             } else if (button.innerHTML === "Fantasy") {
                 for (let card of cards) {
-                    if (!card.classList.contains("Gabor")) {
+                    if (!card.classList.contains("Fantasy")) {
                         card.classList.add("not-selected");
                     } else {
                         card.classList.remove("not-selected");
@@ -68,6 +72,10 @@ let filterByGenre = function () {
                     } else {
                         card.classList.remove("not-selected");
                     }
+                }
+            } else {
+                for (let card of cards) {
+                    card.classList.remove("not-selected");
                 }
             }
         })
