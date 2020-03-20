@@ -1,0 +1,148 @@
+#+OPTIONS: toc:nil num:nil ^:nil
+#+TITLE: 4th week review
+#+AUTHOR: Bence Fábián <begnoc@gmail.com>
+
+* Possible ideas
+
+  - Add an admin scren to edit the DB
+
+* Understanding streams
+
+  Example code:
+  #+BEGIN_SRC java
+    public Recommender find(int id) {
+        return data
+            .stream()                     // create a stream which has the elements of `data`
+            .filter(t -> t.getId() == id) // new stream with only the elements matching ID
+            .findFirst()                  // extract the first element of the stream from the stream, if any
+            .orElse(null);                // if none matching, return `null`.  Otherwise extract element from Optional
+    }
+  #+END_SRC
+
+  As a classic loop:
+  #+BEGIN_SRC java
+    public Recommender find(int id) {
+        Recommender result = null;
+
+        for (Recommender recommender : data) {
+            if (id == recommender.getId()) {  // filter
+                result = recommender;
+                return result;  // find first
+            }
+        }
+
+        return result;
+    }
+  #+END_SRC
+
+* Refactoring example
+
+  Let's refactor the following code:
+  #+BEGIN_SRC js
+    let filterByRecommender = function () {
+        let filterRecommenderButtons = document.querySelectorAll('.drop-recommender');
+        let cards = document.querySelectorAll(".card");
+        for (let button of filterRecommenderButtons) {
+            button.addEventListener("click", function () {
+                if (button.innerHTML === "Kornel") {
+                    for (let card of cards) {
+                        if (!card.classList.contains("Kornel")) {
+                            card.classList.add("not-selected");
+                        } else {
+                            card.classList.remove("not-selected");
+                        }
+                    }
+                } else if (button.innerHTML === "Peti") {
+                    for (let card of cards) {
+                        if (!card.classList.contains("Peti")) {
+                            card.classList.add("not-selected");
+                        } else {
+                            card.classList.remove("not-selected");
+                        }
+                    }
+                } else if (button.innerHTML === "Gabor") {
+                    for (let card of cards) {
+                        if (!card.classList.contains("Gabor")) {
+                            card.classList.add("not-selected");
+                        } else {
+                            card.classList.remove("not-selected");
+                        }
+                    }
+                }else {
+                    for (let card of cards) {
+                        card.classList.remove("not-selected");
+                    }
+                }
+            })
+        }
+    }
+  #+END_SRC
+
+  Extract shared logic into a function:
+  #+BEGIN_SRC js
+    function hideCardsFor(recommender, button, cards) {
+        for (let card of cards) {
+            if (!card.classList.contains(recommender)) {
+                card.classList.add("not-selected");
+            } else {
+                card.classList.remove("not-selected");
+            }
+        }
+    }
+  #+END_SRC
+
+  Which makes the new code:
+  #+BEGIN_SRC js
+    let filterByRecommender = function () {
+        let filterRecommenderButtons = document.querySelectorAll('.drop-recommender');
+        let cards = document.querySelectorAll(".card");
+        for (let button of filterRecommenderButtons) {
+            const recommender = button.innerHTML;
+            button.addEventListener("click", function () {
+                if (recommender === "Kornel") {
+                    hideCardsFor(recommender, button, cards);
+                } else if (recommender === "Peti") {
+                    hideCardsFor(recommender, button, cards);
+                } else if (recommender === "Gabor") {
+                    hideCardsFor(recommender, button, cards);
+                }else {
+                    for (let card of cards) {
+                        card.classList.remove("not-selected");
+                    }
+                }
+            })
+        }
+    }
+  #+END_SRC
+
+  There are still 3 duplicated lines.  And we would need to duplicate
+  them for a new recommender.
+
+  Create an =isValidRecommender= function:
+  #+BEGIN_SRC js
+    const recommenders = new Set(['Gabor', 'Kornel', 'Peti']);
+
+    function isValidRecommender(recommender) {
+        return recommenders.has(recommender);
+    }
+  #+END_SRC
+
+  Thus the new code is:
+  #+BEGIN_SRC js
+    let filterByRecommender = function () {
+        let filterRecommenderButtons = document.querySelectorAll('.drop-recommender');
+        let cards = document.querySelectorAll(".card");
+        for (let button of filterRecommenderButtons) {
+            const recommender = button.innerHTML;
+            button.addEventListener("click", function () {
+                if (isValidRecommender(recommender) {
+                    hideCardsFor(recommender, button, cards);
+                } else {
+                    for (let card of cards) {
+                        card.classList.remove("not-selected");
+                    }
+                }
+            })
+        }
+    }
+  #+END_SRC
