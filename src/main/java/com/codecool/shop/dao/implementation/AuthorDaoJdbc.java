@@ -1,11 +1,11 @@
 package com.codecool.shop.dao.implementation;
 
-import com.codecool.shop.dao.PublisherDao;
+import com.codecool.shop.dao.RecommenderDao;
 import com.codecool.shop.model.Recommender;
 
 import java.util.List;
 
-public class AuthorDaoJdbc implements PublisherDao {
+public class AuthorDaoJdbc implements RecommenderDao {
     @Override
     public void add(Recommender recommender) {
 

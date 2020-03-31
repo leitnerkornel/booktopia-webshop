@@ -1,24 +1,24 @@
 package com.codecool.shop.dao.implementation;
 
-import com.codecool.shop.dao.PublisherDao;
+import com.codecool.shop.dao.RecommenderDao;
 import com.codecool.shop.model.Recommender;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PublisherDaoMem implements PublisherDao {
+public class RecommenderDaoMem implements RecommenderDao {
 
     private List<Recommender> data = new ArrayList<>();
-    private static PublisherDaoMem instance = null;
+    private static RecommenderDaoMem instance = null;
 
     /* A private Constructor prevents any other class from instantiating.
      */
-    private PublisherDaoMem() {
+    private RecommenderDaoMem() {
     }
 
-    public static PublisherDaoMem getInstance() {
+    public static RecommenderDaoMem getInstance() {
         if (instance == null) {
-            instance = new PublisherDaoMem();
+            instance = new RecommenderDaoMem();
         }
         return instance;
     }

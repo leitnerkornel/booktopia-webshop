@@ -2,11 +2,11 @@ package com.codecool.shop.config;
 
 import com.codecool.shop.dao.GenreDao;
 import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.dao.PublisherDao;
+import com.codecool.shop.dao.RecommenderDao;
 import com.codecool.shop.dao.implementation.GenreDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoJdbc;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
-import com.codecool.shop.dao.implementation.PublisherDaoMem;
+import com.codecool.shop.dao.implementation.RecommenderDaoMem;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.Genre;
 import com.codecool.shop.model.Recommender;
@@ -23,7 +23,7 @@ public class Initializer implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
         ProductDao productDataStore = ProductDaoMem.getInstance();
         GenreDao productCategoryDataStore = GenreDaoMem.getInstance();
-        PublisherDao supplierDataStore = PublisherDaoMem.getInstance();
+        RecommenderDao supplierDataStore = RecommenderDaoMem.getInstance();
         ProductDao productDaoTest = ProductDaoJdbc.getInstance();
 
         //setting up a new Recommender

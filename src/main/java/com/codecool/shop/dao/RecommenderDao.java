@@ -4,7 +4,7 @@ import com.codecool.shop.model.Recommender;
 
 import java.util.List;
 
-public interface PublisherDao {
+public interface RecommenderDao {
 
     void add(Recommender recommender);
     Recommender find(int id);
