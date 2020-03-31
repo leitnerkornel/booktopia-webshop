@@ -4,6 +4,7 @@ import com.codecool.shop.dao.GenreDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.PublisherDao;
 import com.codecool.shop.dao.implementation.GenreDaoMem;
+import com.codecool.shop.dao.implementation.ProductDaoJdbc;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.PublisherDaoMem;
 import com.codecool.shop.model.Product;
@@ -23,6 +24,7 @@ public class Initializer implements ServletContextListener {
         ProductDao productDataStore = ProductDaoMem.getInstance();
         GenreDao productCategoryDataStore = GenreDaoMem.getInstance();
         PublisherDao supplierDataStore = PublisherDaoMem.getInstance();
+        ProductDao productDaoTest = ProductDaoJdbc.getInstance();
 
         //setting up a new Recommender
         Recommender peti = new Recommender("Peti", "Book specialist from Codecool.");
@@ -59,8 +61,9 @@ public class Initializer implements ServletContextListener {
         Genre fantasy = new Genre("Fantasy");
         productCategoryDataStore.add(fantasy);
 
-        //setting up products and printing it
-        // Peti's books
+        productDaoTest.add(new Product("x", 8.99f, "USD", "This is", childrensBook, kornel, jeanDominiqueBauby));
+//        setting up products and printing it
+//         Peti's books
         productDataStore.add(new Product("The diving bell and the butterfly", 8.99f, "USD", "The Diving Bell and the Butterfly is a memoir by journalist Jean-Dominique Bauby. It describes his life before and after suffering a massive stroke that left him with locked-in syndrome.", thriller, peti, jeanDominiqueBauby));
         productDataStore.add(new Product("The troop", 14.54f, "USD", "Once a year, scoutmaster Tim Riggs leads a troop of boys into the Canadian wilderness for a three-day camping trip - tradition as comforting and reliable as a good ghost story and a roaring bonfire. But when an unexpected intruder - shockingly thin, disturbingly pale, and voraciously hungry - stumbles upon their campsite, Tim and the boys are exposed to something far more frightening than any tale of terror. The human carrier of a bioengineered nightmare. An inexplicable horror that spreads faster than fear. A harrowing struggle for survival that will pit the troop against the elements, the infected ... and one another.", thriller, peti, nickCutter));
         productDataStore.add(new Product("Player piano", 12.82f, "USD", "The story takes place in a near-future society that is almost totally mechanized, eliminating the need for human laborers. The widespread mechanization creates conflict between the wealthy upper class, the engineers and managers, who keep society running, and the lower class, whose skills and purpose in society have been replaced by machines. The book uses irony and sentimentality, which were to become hallmarks developed further in Vonnegut's later works", satire, peti, kurtVonnegut));
@@ -80,5 +83,9 @@ public class Initializer implements ServletContextListener {
         productDataStore.add(new Product("Animal Farm", 89, "USD", "Animal Farm is an allegorical novella by George Orwell, first published in England on 17 August 1945. The book tells the story of a group of farm animals who rebel against their human farmer, hoping to create a society where the animals can be equal, free, and happy. Ultimately, however, the rebellion is betrayed and the farm ends up in a state as bad as it was before, under the dictatorship of a pig named Napoleon.", satire, gabor, georgeOrwell));
         productDataStore.add(new Product("The Wilt Alternative", 89, "USD", "In this, the second of Tom Sharpe's chronicles about Henry Wilt, our hero is no longer the victim of his own uncontrolled fantasies. He becomes the unintentional participant in a terrorist siege that he is forced to find an answer to the problems of power, which have corrupted greater men than he.", satire, gabor, tomSharpe));
         productDataStore.add(new Product("Busytown", 89, "USD", "Busytown is a fictional town depicted in several books by the children's author Richard Scarry. Busytown is inhabited by an assortment of anthropomorphic animals, including Huckle Cat, Lowly Worm, Mr. Frumble, police Sergeant Murphy, Mr. Fixit, Bananas Gorilla and Hilda Hippo.", childrensBook, gabor, richardScarry));
+
+
     }
+
+
 }
