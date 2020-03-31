@@ -5,7 +5,7 @@ import com.codecool.shop.model.Recommender;
 
 import java.util.List;
 
-public class PublisherDaoJdbc implements PublisherDao {
+public class AuthorDaoJdbc implements PublisherDao {
     @Override
     public void add(Recommender recommender) {
 
