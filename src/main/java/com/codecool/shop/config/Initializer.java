@@ -20,9 +20,10 @@ public class Initializer implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         // Memory Stores
+        AuthorDao authorDataStore = AuthorDaoMem.getInstance();
         ProductDao productDataStore = ProductDaoMem.getInstance();
         GenreDao genreDataStore = GenreDaoMem.getInstance();
-        RecommenderDao supplierDataStore = RecommenderDaoMem.getInstance();
+        RecommenderDao recommenderDataStore = RecommenderDaoMem.getInstance();
 
         // DataBase Stores
         GenreDao genreDataStoreDB = GenreDaoJdbc.getInstance();
@@ -76,6 +77,10 @@ public class Initializer implements ServletContextListener {
         authorDataStoreDB.add(georgeOrwell);
         authorDataStoreDB.add(tomSharpe);
         authorDataStoreDB.add(richardScarry);
+
+        for (Author author : authorDataStoreDB.getAll()) {
+            authorDataStore.add(author);
+        }
 
         Integer jdbID = authorDataStoreDB.findByName(jeanDominiqueBauby.getName());
         Integer nickCutterID = authorDataStoreDB.findByName(nickCutter.getName());
