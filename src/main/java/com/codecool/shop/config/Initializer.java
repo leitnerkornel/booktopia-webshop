@@ -25,7 +25,7 @@ public class Initializer implements ServletContextListener {
         ProductDao productDaoTest = ProductDaoJdbc.getInstance();
 
         GenreDao genreDataStoreDB = GenreDaoJdbc.getInstance();
-        AuthorDao authorDateStoreDB = new AuthorDaoJdbc();
+        AuthorDao authorDateStoreDB = AuthorDaoJdbc.getInstance();
 
         ProductDao productDataStoreDB = ProductDaoJdbc.getInstance();
 
