@@ -7,6 +7,7 @@ import java.util.List;
 public interface AuthorDao {
 
     void add(Author author);
+    Integer findByName(String authorName);
     Author find(int id);
     void remove(int id);
 

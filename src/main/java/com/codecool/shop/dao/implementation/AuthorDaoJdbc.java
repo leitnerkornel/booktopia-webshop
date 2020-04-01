@@ -3,6 +3,7 @@ package com.codecool.shop.dao.implementation;
 import com.codecool.shop.config.SQLConnection;
 import com.codecool.shop.dao.AuthorDao;
 import com.codecool.shop.model.Author;
+import com.codecool.shop.model.Product;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,6 +13,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AuthorDaoJdbc implements AuthorDao {
+
+    private List<Product> data = new ArrayList<>();
+    private static AuthorDaoJdbc instance = null;
+
+    private AuthorDaoJdbc() {
+    }
+
+    public static AuthorDaoJdbc getInstance() {
+        if (instance == null) {
+            instance = new AuthorDaoJdbc();
+        }
+        return instance;
+    }
     @Override
     public void add(Author author) {
         Connection cursor = SQLConnection.getDb();
@@ -49,6 +63,32 @@ public class AuthorDaoJdbc implements AuthorDao {
             while (rs.next()) {
                 String authorName = rs.getString("name");
                 return new Author(authorName);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                cursor.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public Integer findByName(String authorName) {
+        Connection cursor = SQLConnection.getDb();
+
+        String query = "SELECT id FROM author WHERE name = ?";
+        try {
+            PreparedStatement prepAdd = cursor.prepareStatement(query,
+                    ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
+            prepAdd.setString(1, authorName);
+            ResultSet rs = prepAdd.executeQuery();
+            while (rs.next()) {
+                return rs.getInt("id");
             }
 
         } catch (SQLException e) {
