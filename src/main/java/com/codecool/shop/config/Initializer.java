@@ -1,5 +1,6 @@
 package com.codecool.shop.config;
 
+import com.codecool.shop.dao.AuthorDao;
 import com.codecool.shop.dao.GenreDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.RecommenderDao;
@@ -23,6 +24,7 @@ public class Initializer implements ServletContextListener {
         RecommenderDao supplierDataStore = RecommenderDaoMem.getInstance();
         ProductDao productDaoTest = ProductDaoJdbc.getInstance();
         GenreDao genreDaoTest = new GenreDaoJdbc();
+        AuthorDao authorDaoTest = new AuthorDaoJdbc();
 
         ProductDao productDataStoreDB = ProductDaoJdbc.getInstance();
 
@@ -63,6 +65,7 @@ public class Initializer implements ServletContextListener {
 
         productDaoTest.add(new Product("x", 8.99f, "USD", "This is", childrensBook, kornel, jeanDominiqueBauby));
         genreDaoTest.add(new Genre("Thriller"));
+        authorDaoTest.add(new Author("testtest"));
 //        setting up products and printing it
 //         Peti's books
         // Store books in the database via ProductDaoJDBC
