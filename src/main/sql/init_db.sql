@@ -28,29 +28,6 @@ CREATE TABLE book
     genre_id       INTEGER REFERENCES genre (id),
     recommender_id INTEGER REFERENCES recommender (id),
     title          VARCHAR(255) NOT NULL,
-    description    VARCHAR(2000)
+    description    VARCHAR(2000),
+    price          FLOAT
 );
-
-
-INSERT INTO author (name)
-VALUES ('Jean-Dominique Bauby'),
-       ('Nick Cutter'),
-       ('Kurt Vonnegut'),
-       ('R. A. Salvatore'),
-       ('Philip K. Dick'),
-       ('Jo Nesbo'),
-       ('J. K. Rowling'),
-       ('Dan Brown'),
-       ('Agatha Christie'),
-       ('Jonas Jonasson'),
-       ('Robert Merle'),
-       ('Ilf-Petrov'),
-       ('George Orwell'),
-       ('Tom Sharpe'),
-       ('Richard Scarry')
-;
-
-INSERT INTO book (author_id, title)
-VALUES ((SELECT id FROM author WHERE name = 'Jean-Dominique Bauby'), 'The diving bell and the butterfly'),
-       ((SELECT id FROM author WHERE name = 'Nick Cutter'), 'The troop')
-;
