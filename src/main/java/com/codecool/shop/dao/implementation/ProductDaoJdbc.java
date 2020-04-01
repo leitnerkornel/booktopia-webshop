@@ -35,20 +35,21 @@ public class ProductDaoJdbc implements ProductDao {
     @Override
     public void add(Product product) {
         Connection cursor = SQLConnection.getDb();
-        String query = "INSERT INTO book (genre_id, title, description, price) SELECT ?, ?, ?, ? WHERE NOT EXISTS (SELECT ? FROM book WHERE title = ?)";
+        String query = "INSERT INTO book (author_id, genre_id, title, description, price) SELECT ?, ?, ?, ?, ? WHERE NOT EXISTS (SELECT ? FROM book WHERE title = ?)";
 
         try {
             PreparedStatement prepAdd = cursor.prepareStatement(query,
                     ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
-//            prepAdd.setInt(1, product.getAuthor().getId());
+            prepAdd.setInt(1, product.getAuthor());
             //String genreName = product.getGenre().getName();
-            prepAdd.setInt(1, product.getGenre());
+            prepAdd.setInt(2, product.getGenre());
 //            prepAdd.setInt(3, product.getRecommender().getId());
-            prepAdd.setString(2, product.getName());
-            prepAdd.setString(3, product.getDescription());
-            prepAdd.setFloat(4, product.getDefaultPrice());
-            prepAdd.setString(5, product.getName());
+            prepAdd.setString(3, product.getName());
+            prepAdd.setString(4, product.getDescription());
+            prepAdd.setFloat(5, product.getDefaultPrice());
             prepAdd.setString(6, product.getName());
+            prepAdd.setString(7, product.getName());
+
             prepAdd.execute();
         } catch (SQLException e) {
             e.printStackTrace();
