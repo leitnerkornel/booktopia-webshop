@@ -13,17 +13,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RecommenderDaoJdbc implements RecommenderDao {
-    private static Connection cursor = SQLConnection.getDb();
-
 
     @Override
     public void add(Recommender recommender) {
-        String insertQuery = "INSERT INTO recommender (name) VALUES (?)";
+        Connection cursor = SQLConnection.getDb();
+        String recommenderName = recommender.getName();
+
+        String insertQuery = "INSERT INTO recommender (name) SELECT ? WHERE NOT EXISTS(SELECT name FROM genre WHERE name = ?)";
 
         try {
             PreparedStatement prepAdd = cursor.prepareStatement(insertQuery,
                     ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
-            prepAdd.setString(1, recommender.getName());
+            prepAdd.setString(1, recommenderName);
+            prepAdd.setString(2, recommenderName);
             prepAdd.execute();
 
         } catch (SQLException e) {
@@ -40,6 +42,8 @@ public class RecommenderDaoJdbc implements RecommenderDao {
 
     @Override
     public Recommender find(int id) {
+        Connection cursor = SQLConnection.getDb();
+
         String query = "SELECT name FROM recommender WHERE id = ${id}";
         try {
             PreparedStatement prepAdd = cursor.prepareStatement(query,
@@ -60,6 +64,8 @@ public class RecommenderDaoJdbc implements RecommenderDao {
 
     @Override
     public void remove(int id) {
+        Connection cursor = SQLConnection.getDb();
+
         String deleteQuery = "DELETE FROM recommender WHERE (SELECT id FROM genre WHERE id = ${id})";
         try {
             PreparedStatement prepAdd = cursor.prepareStatement(deleteQuery,
@@ -79,6 +85,8 @@ public class RecommenderDaoJdbc implements RecommenderDao {
 
     @Override
     public List<Recommender> getAll() {
+        Connection cursor = SQLConnection.getDb();
+
         List<Genre> allRecommender = new ArrayList<>();
         String query = "SELECT * FROM recommender";
         try {
