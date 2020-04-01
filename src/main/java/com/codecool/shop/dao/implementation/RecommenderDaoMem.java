@@ -30,6 +30,11 @@ public class RecommenderDaoMem implements RecommenderDao {
     }
 
     @Override
+    public Integer findByName(String recommenderName) {
+        return null;
+    }
+
+    @Override
     public Recommender find(int id) {
         return data.stream().filter(t -> t.getId() == id).findFirst().orElse(null);
     }

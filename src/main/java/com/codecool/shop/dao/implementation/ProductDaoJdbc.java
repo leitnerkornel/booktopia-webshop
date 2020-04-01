@@ -35,7 +35,7 @@ public class ProductDaoJdbc implements ProductDao {
     @Override
     public void add(Product product) {
         Connection cursor = SQLConnection.getDb();
-        String query = "INSERT INTO book (author_id, genre_id, title, description, price) SELECT ?, ?, ?, ?, ? WHERE NOT EXISTS (SELECT ? FROM book WHERE title = ?)";
+        String query = "INSERT INTO book (author_id, genre_id, recommender_id, title, description, price) SELECT ?, ?, ?, ?, ?, ? WHERE NOT EXISTS (SELECT ? FROM book WHERE title = ?)";
 
         try {
             PreparedStatement prepAdd = cursor.prepareStatement(query,
@@ -43,12 +43,12 @@ public class ProductDaoJdbc implements ProductDao {
             prepAdd.setInt(1, product.getAuthor());
             //String genreName = product.getGenre().getName();
             prepAdd.setInt(2, product.getGenre());
-//            prepAdd.setInt(3, product.getRecommender().getId());
-            prepAdd.setString(3, product.getName());
-            prepAdd.setString(4, product.getDescription());
-            prepAdd.setFloat(5, product.getDefaultPrice());
-            prepAdd.setString(6, product.getName());
+            prepAdd.setInt(3, product.getRecommender());
+            prepAdd.setString(4, product.getName());
+            prepAdd.setString(5, product.getDescription());
+            prepAdd.setFloat(6, product.getDefaultPrice());
             prepAdd.setString(7, product.getName());
+            prepAdd.setString(8, product.getName());
 
             prepAdd.execute();
         } catch (SQLException e) {
