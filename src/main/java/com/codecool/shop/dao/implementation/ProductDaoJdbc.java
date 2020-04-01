@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 public class ProductDaoJdbc implements ProductDao {
     private List<Product> data = new ArrayList<>();
     private static ProductDaoJdbc instance = null;
-    private static Connection cursor = SQLConnection.getDb();
+
 
     /* A private Constructor prevents any other class from instantiating.
      */
@@ -33,8 +33,9 @@ public class ProductDaoJdbc implements ProductDao {
 
     @Override
     public void add(Product product) {
+        Connection cursor = SQLConnection.getDb();
         String query = "INSERT INTO book (title, description, price) SELECT ?, ?, ? WHERE NOT EXISTS (SELECT ? FROM book WHERE title = ?)";
-        //String subQuery = "";
+
         try {
             PreparedStatement prepAdd = cursor.prepareStatement(query,
                     ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
@@ -47,7 +48,6 @@ public class ProductDaoJdbc implements ProductDao {
             prepAdd.setString(4, product.getName());
             prepAdd.setString(5, product.getName());
             prepAdd.execute();
-
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
