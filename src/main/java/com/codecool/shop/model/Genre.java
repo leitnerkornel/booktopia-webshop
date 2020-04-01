@@ -26,9 +26,7 @@ public class Genre extends BaseModel {
     public String toString() {
         return String.format(
                 "id: %1$d," +
-                        "name: %2$s, " +
-                        "department: %3$s, " +
-                        "description: %4$s",
+                        "name: %2$s",
                 this.id,
                 this.name);
     }
