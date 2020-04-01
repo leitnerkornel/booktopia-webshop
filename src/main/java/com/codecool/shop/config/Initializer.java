@@ -19,15 +19,16 @@ public class Initializer implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
+        // Memory Stores
         ProductDao productDataStore = ProductDaoMem.getInstance();
         GenreDao genreDataStore = GenreDaoMem.getInstance();
         RecommenderDao supplierDataStore = RecommenderDaoMem.getInstance();
-        ProductDao productDaoTest = ProductDaoJdbc.getInstance();
 
+        // DataBase Stores
         GenreDao genreDataStoreDB = GenreDaoJdbc.getInstance();
         AuthorDao authorDataStoreDB = AuthorDaoJdbc.getInstance();
-
         ProductDao productDataStoreDB = ProductDaoJdbc.getInstance();
+
 
         //setting up a new Recommender
         Recommender peti = new Recommender("Peti", "Book specialist from Codecool.");
