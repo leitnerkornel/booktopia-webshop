@@ -1,5 +1,6 @@
 package com.codecool.shop.config;
 
+import com.codecool.shop.dao.AuthorDao;
 import com.codecool.shop.dao.GenreDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.RecommenderDao;
@@ -24,6 +25,7 @@ public class Initializer implements ServletContextListener {
         ProductDao productDaoTest = ProductDaoJdbc.getInstance();
 
         GenreDao genreDataStoreDB = GenreDaoJdbc.getInstance();
+        AuthorDao authorDateStoreDB = new AuthorDaoJdbc();
 
         ProductDao productDataStoreDB = ProductDaoJdbc.getInstance();
 
@@ -71,14 +73,11 @@ public class Initializer implements ServletContextListener {
         Integer fantasyId = genreDataStoreDB.findByName(fantasy.getName());
         Integer childrensBookId = genreDataStoreDB.findByName(childrensBook.getName());
         Integer satireId = genreDataStoreDB.findByName(satire.getName());
-        productDaoTest.add(new Product("x", 8.99f, "USD", "This is", thrillerId, kornel, jeanDominiqueBauby));
 
 //        setting up products and printing it
 //         Peti's books
         // Store books in the database via ProductDaoJDBC
-        productDataStoreDB.add(new Product("New test - After pom", 8.99f, "USD", "This is", thrillerId, kornel, jeanDominiqueBauby));
 
-        productDataStoreDB.add(new Product("The Snowman", 11.33f, "USD", "The night the first snow falls a young boy wakes to find his mother gone.", 1, kornel, joNesbo));
 
         // Setting products to store them in the memory
         // Peti's books
