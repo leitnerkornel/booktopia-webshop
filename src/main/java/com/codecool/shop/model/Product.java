@@ -7,13 +7,14 @@ public class Product extends BaseModel {
     private float defaultPrice;
     private Currency defaultCurrency;
     private Integer genre;
-    private Recommender recommender;
+    private Integer recommender;
     private Integer author;
     private Genre genreObj;
     private Author authorObj;
+    private Recommender recommenderObj;
 
 
-    public Product(String name, float defaultPrice, String currencyString, String description, Integer genre, Recommender recommender, Integer author) {
+    public Product(String name, float defaultPrice, String currencyString, String description, Integer genre, Integer recommender, Integer author) {
         super(name, description);
         this.setPrice(defaultPrice, currencyString);
         this.setRecommender(recommender);
@@ -24,9 +25,9 @@ public class Product extends BaseModel {
     public Product(String name, float defaultPrice, String currencyString, String description, Genre genre, Recommender recommender, Author author) {
         super(name, description);
         this.setPrice(defaultPrice, currencyString);
-        this.setRecommender(recommender);
         this.setGenreObj(genre);
         this.setAuthorObj(author);
+        this.setRecommenderObj(recommender);
     }
 
     public float getDefaultPrice() {
@@ -67,13 +68,17 @@ public class Product extends BaseModel {
         this.genreObj.addProduct(this);
     }
 
-    public Recommender getRecommender() {
+    public Integer getRecommender() {
         return recommender;
     }
 
-    public void setRecommender(Recommender recommender) {
+    public void setRecommender(Integer recommender) {
         this.recommender = recommender;
-        this.recommender.addProduct(this);
+    }
+
+    public void setRecommenderObj(Recommender recommender) {
+        this.recommenderObj = recommender;
+        this.recommenderObj.addProduct(this);
     }
 
     public Integer getAuthor() { return author;}
@@ -98,8 +103,8 @@ public class Product extends BaseModel {
                 this.id,
                 this.name,
                 this.defaultPrice,
-                this.defaultCurrency.toString(),
+                this.defaultCurrency.toString());
                 //this.genre.getName(),
-                this.recommender.getName());
+                //this.recommender.getName());
     }
 }
