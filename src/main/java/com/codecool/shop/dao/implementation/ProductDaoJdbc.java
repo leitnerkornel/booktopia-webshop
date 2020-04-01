@@ -5,6 +5,7 @@ import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.model.Genre;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.Recommender;
+import com.codecool.shop.dao.implementation.GenreDaoJdbc;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -34,19 +35,20 @@ public class ProductDaoJdbc implements ProductDao {
     @Override
     public void add(Product product) {
         Connection cursor = SQLConnection.getDb();
-        String query = "INSERT INTO book (title, description, price) SELECT ?, ?, ? WHERE NOT EXISTS (SELECT ? FROM book WHERE title = ?)";
+        String query = "INSERT INTO book (genre_id, title, description, price) SELECT ?, ?, ?, ? WHERE NOT EXISTS (SELECT ? FROM book WHERE title = ?)";
 
         try {
             PreparedStatement prepAdd = cursor.prepareStatement(query,
                     ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
 //            prepAdd.setInt(1, product.getAuthor().getId());
-//            prepAdd.setInt(2, product.getGenre().getId());
+            //String genreName = product.getGenre().getName();
+            prepAdd.setInt(1, product.getGenre());
 //            prepAdd.setInt(3, product.getRecommender().getId());
-            prepAdd.setString(1, product.getName());
-            prepAdd.setString(2, product.getDescription());
-            prepAdd.setFloat(3, product.getDefaultPrice());
-            prepAdd.setString(4, product.getName());
+            prepAdd.setString(2, product.getName());
+            prepAdd.setString(3, product.getDescription());
+            prepAdd.setFloat(4, product.getDefaultPrice());
             prepAdd.setString(5, product.getName());
+            prepAdd.setString(6, product.getName());
             prepAdd.execute();
         } catch (SQLException e) {
             e.printStackTrace();

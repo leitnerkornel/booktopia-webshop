@@ -3,6 +3,7 @@ package com.codecool.shop.dao.implementation;
 import com.codecool.shop.config.SQLConnection;
 import com.codecool.shop.dao.GenreDao;
 import com.codecool.shop.model.Genre;
+import com.codecool.shop.model.Product;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -10,6 +11,19 @@ import java.util.Arrays;
 import java.util.List;
 
 public class GenreDaoJdbc implements GenreDao {
+    private List<Product> data = new ArrayList<>();
+    private static GenreDaoJdbc instance = null;
+
+    private GenreDaoJdbc() {
+    }
+
+    public static GenreDaoJdbc getInstance() {
+        if (instance == null) {
+            instance = new GenreDaoJdbc();
+        }
+        return instance;
+    }
+
 
     @Override
     public void add(Genre category) {
@@ -49,6 +63,32 @@ public class GenreDaoJdbc implements GenreDao {
                 String genreName = rs.getString("name");
                 Genre returnGenre = new Genre(genreName);
                 return returnGenre;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                cursor.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public Integer findByName(String genreName) {
+        Connection cursor = SQLConnection.getDb();
+
+        String query = "SELECT id FROM genre WHERE name = ?";
+        try {
+            PreparedStatement prepAdd = cursor.prepareStatement(query,
+                    ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
+            prepAdd.setString(1, genreName);
+            ResultSet rs = prepAdd.executeQuery();
+            while (rs.next()) {
+                return rs.getInt("id");
             }
 
         } catch (SQLException e) {

@@ -36,6 +36,11 @@ public class GenreDaoMem implements GenreDao {
     }
 
     @Override
+    public Integer findByName(String genreName) {
+        return 0;
+    }
+
+    @Override
     public void remove(int id) {
         data.remove(find(id));
     }

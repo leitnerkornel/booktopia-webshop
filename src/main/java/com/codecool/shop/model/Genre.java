@@ -11,6 +11,18 @@ public class Genre extends BaseModel {
         this.products = new ArrayList<>();
     }
 
+    public Genre(String name, Integer id) {
+        super(name);
+        this.dataBaseId = id;
+        this.products = new ArrayList<>();
+    }
+
+    public Integer getDataBaseId() {
+        return this.dataBaseId;
+    }
+
+
+
     public void setProducts(ArrayList<Product> products) {
         this.products = products;
     }

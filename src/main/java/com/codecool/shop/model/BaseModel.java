@@ -8,6 +8,7 @@ public class BaseModel {
     protected int id;
     protected String name;
     protected String description;
+    protected int dataBaseId;
 
     public BaseModel(String name) {
         this.name = name;
