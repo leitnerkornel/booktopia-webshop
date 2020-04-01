@@ -61,8 +61,7 @@ public class GenreDaoJdbc implements GenreDao {
             ResultSet rs = prepAdd.executeQuery();
             while (rs.next()) {
                 String genreName = rs.getString("name");
-                Genre returnGenre = new Genre(genreName);
-                return returnGenre;
+                return new Genre(genreName);
             }
 
         } catch (SQLException e) {

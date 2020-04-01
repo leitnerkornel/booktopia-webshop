@@ -6,7 +6,7 @@ import java.util.List;
 public class Recommender extends BaseModel {
     private List<Product> products;
 
-    public Recommender(String name, String description) {
+    public Recommender(String name) {
         super(name);
         this.products = new ArrayList<>();
     }
