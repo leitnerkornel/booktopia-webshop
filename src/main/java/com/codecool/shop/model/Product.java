@@ -3,7 +3,6 @@ package com.codecool.shop.model;
 import java.util.Currency;
 
 public class Product extends BaseModel {
-
     private float defaultPrice;
     private Currency defaultCurrency;
     private Integer genre;
@@ -11,6 +10,7 @@ public class Product extends BaseModel {
     private Integer author;
     private Genre genreObj;
     private Author authorObj;
+    private Integer stock;
     private Recommender recommenderObj;
 
 
@@ -63,6 +63,10 @@ public class Product extends BaseModel {
         this.genre = genre;
     }
 
+    public Genre getGenreObj() {
+        return genreObj;
+    }
+
     public void setGenreObj(Genre genre) {
         this.genreObj = genre;
         this.genreObj.addProduct(this);
@@ -106,5 +110,13 @@ public class Product extends BaseModel {
                 this.defaultCurrency.toString());
                 //this.genre.getName(),
                 //this.recommender.getName());
+    }
+
+    public void setStock(Integer stock) {
+        this.stock = stock;
+    }
+
+    public Integer getStock() {
+        return stock;
     }
 }
