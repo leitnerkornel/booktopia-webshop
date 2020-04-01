@@ -28,7 +28,8 @@ CREATE TABLE book
     genre_id       INTEGER REFERENCES genre (id),
     recommender_id INTEGER REFERENCES recommender (id),
     title          VARCHAR(255) NOT NULL,
-    description    VARCHAR(2000)
+    description    VARCHAR(2000),
+    price          FLOAT
 );
 
 

@@ -33,11 +33,19 @@ public class ProductDaoJdbc implements ProductDao {
 
     @Override
     public void add(Product product) {
-        String query = "INSERT INTO author (name) VALUES ('Jane Doe')";
-
+        String query = "INSERT INTO book (title, description, price) SELECT ?, ?, ? WHERE NOT EXISTS (SELECT ? FROM book WHERE title = ?)";
+        //String subQuery = "";
         try {
             PreparedStatement prepAdd = cursor.prepareStatement(query,
                     ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
+//            prepAdd.setInt(1, product.getAuthor().getId());
+//            prepAdd.setInt(2, product.getGenre().getId());
+//            prepAdd.setInt(3, product.getRecommender().getId());
+            prepAdd.setString(1, product.getName());
+            prepAdd.setString(2, product.getDescription());
+            prepAdd.setFloat(3, product.getDefaultPrice());
+            prepAdd.setString(4, product.getName());
+            prepAdd.setString(5, product.getName());
             prepAdd.execute();
 
         } catch (SQLException e) {
