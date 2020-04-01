@@ -1,5 +1,6 @@
 package com.codecool.shop.config;
 
+import com.codecool.shop.dao.AuthorDao;
 import com.codecool.shop.dao.GenreDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.RecommenderDao;
@@ -23,6 +24,7 @@ public class Initializer implements ServletContextListener {
         RecommenderDao supplierDataStore = RecommenderDaoMem.getInstance();
         ProductDao productDaoTest = ProductDaoJdbc.getInstance();
         GenreDao genreDaoTest = new GenreDaoJdbc();
+        AuthorDao authorDaoTest = new AuthorDaoJdbc();
 
         //setting up a new Recommender
         Recommender peti = new Recommender("Peti", "Book specialist from Codecool.");
@@ -61,6 +63,8 @@ public class Initializer implements ServletContextListener {
 
         productDaoTest.add(new Product("x", 8.99f, "USD", "This is", childrensBook, kornel, jeanDominiqueBauby));
         genreDaoTest.add(new Genre("Thriller"));
+        authorDaoTest.add(new Author("Test"));
+        authorDaoTest.remove(16);
 //        setting up products and printing it
 //         Peti's books
         productDataStore.add(new Product("The diving bell and the butterfly", 8.99f, "USD", "The Diving Bell and the Butterfly is a memoir by journalist Jean-Dominique Bauby. It describes his life before and after suffering a massive stroke that left him with locked-in syndrome.", thriller, peti, jeanDominiqueBauby));
