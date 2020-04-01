@@ -20,7 +20,8 @@ public class GenreDaoJdbc implements GenreDao {
             PreparedStatement prepAdd = cursor.prepareStatement(insertQuery,
                     ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
             prepAdd.setString(1,genreName);
-            prepAdd.executeQuery();
+            prepAdd.setString(2,genreName);
+            prepAdd.execute();
 
         } catch (SQLException e) {
             e.printStackTrace();
