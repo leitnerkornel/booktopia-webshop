@@ -3,10 +3,7 @@ package com.codecool.shop.config;
 import com.codecool.shop.dao.GenreDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.RecommenderDao;
-import com.codecool.shop.dao.implementation.GenreDaoMem;
-import com.codecool.shop.dao.implementation.ProductDaoJdbc;
-import com.codecool.shop.dao.implementation.ProductDaoMem;
-import com.codecool.shop.dao.implementation.RecommenderDaoMem;
+import com.codecool.shop.dao.implementation.*;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.Genre;
 import com.codecool.shop.model.Recommender;
@@ -25,6 +22,7 @@ public class Initializer implements ServletContextListener {
         GenreDao productCategoryDataStore = GenreDaoMem.getInstance();
         RecommenderDao supplierDataStore = RecommenderDaoMem.getInstance();
         ProductDao productDaoTest = ProductDaoJdbc.getInstance();
+        GenreDao genreDaoTest = new GenreDaoJdbc();
 
         //setting up a new Recommender
         Recommender peti = new Recommender("Peti", "Book specialist from Codecool.");
@@ -62,6 +60,7 @@ public class Initializer implements ServletContextListener {
         productCategoryDataStore.add(fantasy);
 
         productDaoTest.add(new Product("x", 8.99f, "USD", "This is", childrensBook, kornel, jeanDominiqueBauby));
+        genreDaoTest.add(new Genre("Thriller"));
 //        setting up products and printing it
 //         Peti's books
         productDataStore.add(new Product("The diving bell and the butterfly", 8.99f, "USD", "The Diving Bell and the Butterfly is a memoir by journalist Jean-Dominique Bauby. It describes his life before and after suffering a massive stroke that left him with locked-in syndrome.", thriller, peti, jeanDominiqueBauby));
