@@ -20,7 +20,7 @@ public class GenreDaoJdbc implements GenreDao {
             PreparedStatement prepAdd = cursor.prepareStatement(insertQuery,
                     ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
             prepAdd.setString(1,genreName);
-            prepAdd.execute();
+            prepAdd.executeQuery();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -35,11 +35,17 @@ public class GenreDaoJdbc implements GenreDao {
 
     @Override
     public Genre find(int id) {
-        String query = "SELECT name FROM genre WHERE id = ${id}";
+        String query = "SELECT name FROM genre WHERE id = ?";
         try {
             PreparedStatement prepAdd = cursor.prepareStatement(query,
                     ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
-            prepAdd.execute();
+            prepAdd.setInt(1, id);
+            ResultSet rs = prepAdd.executeQuery(query);
+            while (rs.next()) {
+                String genreName = rs.getString("name");
+                Genre returnGenre = new Genre(genreName);
+                return returnGenre;
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -55,12 +61,12 @@ public class GenreDaoJdbc implements GenreDao {
 
     @Override
     public void remove(int genreId) {
-        String deleteQuery = "DELETE FROM genre WHERE (SELECT id FROM genre WHERE id = ${genreId})";
+        String deleteQuery = "DELETE FROM genre WHERE (SELECT id FROM genre WHERE id = ?)";
         try {
             PreparedStatement prepAdd = cursor.prepareStatement(deleteQuery,
                     ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
+            prepAdd.setInt(1, genreId);
             prepAdd.execute();
-
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -82,7 +88,7 @@ public class GenreDaoJdbc implements GenreDao {
             ResultSet rs = prepAdd.executeQuery(query);
             while (rs.next()) {
                 String genreName = rs.getString("name");
-                //allGenre.add();
+                allGenre.add(new Genre(genreName));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -94,7 +100,7 @@ public class GenreDaoJdbc implements GenreDao {
             }
         }
 
-        return null;
+        return allGenre;
     }
 }
 
