@@ -236,6 +236,7 @@
 .not-selected {
     display: none;
 }
+
 .fa-shopping-cart {
     color: gray;
 }
@@ -244,5 +245,107 @@
     color: green;
 }
 
+.modal-header {
+    text-align: center;
+    background: burlywood;
+}
+
+h5 {
+    margin-left: auto;
+    font-weight: bolder;
+    font-family: 'DejaVu Serif', Georgia, "Times New Roman", Times, serif;
+}
+
+.close {
+    margin-right: auto;
+}
+
+.modal-body {
+    background: bisque;
+}
+
+.items-in-cart {
+    text-align: left;
+}
+
+.modal-footer {
+    text-align: center;
+    background: wheat;
+}
+
+.continue-shopping-cart, .checkout-cart {
+    margin: auto;
+}
+
+.item-div {
+    padding: 2px;
+    display: flex;
+}
+
+.cover-cart {
+    height: 80px;
+    width: 60px;
+    border: 2px burlywood solid;
+}
+
+.author-in-cart, .title-in-cart {
+    padding-left: 10px;
+    margin: 0;
+}
+
+.author-in-cart {
+    font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif;
+}
+
+.title-in-cart {
+    font-family: "Times New Roman", Times, serif;
+    font-style: italic;
+    font-size: 14px;
+    padding-top: 2px;
+}
+
+.author-title-cart {
+    padding: 10px;
+    width: 300px;
+}
+
+.price-in-cart {
+    padding-top: 30px;
+    width: 100px;
+}
+
+.count-in-cart {
+    margin-left: 20px;
+    padding-top: 30px;
+}
+
+.empty-cart-text {
+    text-align: center;
+    font-size: 20px;
+    color: red;
+}
+
+.cart-header-container {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.cart-product-header {
+    width: 350px;
+    margin-left: 10px;
+    font-style: italic;
+}
+
+.cart-price-header {
+    width: 55px;
+    text-align: center;
+    font-style: italic;
+}
+
+.cart-quantity-header {
+    margin-left: 35px;
+    text-align: center;
+    font-style: italic;
+}
 
 
