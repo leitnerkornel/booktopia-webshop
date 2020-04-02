@@ -1,5 +1,6 @@
 package com.codecool.shop.dao.implementation;
 
+import com.codecool.shop.model.Author;
 import com.codecool.shop.model.Genre;
 import org.junit.jupiter.api.Test;
 
@@ -23,5 +24,14 @@ class GenreDaoJdbcTest {
     @Test
     void testGetAllElementsReturnsGenres() {
         assertEquals(true, test.getAll().get(1) instanceof Genre);
+    }
+
+    @Test
+    void testAdd() {
+        Genre testGenre = new Genre("Funny Horror");
+        test.add(testGenre);
+        int id = test.findByName("Funny Horror");
+        assertEquals("Funny Horror", test.find(id).getName());
+        test.remove(test.findByName("Funny Horror"));
     }
 }

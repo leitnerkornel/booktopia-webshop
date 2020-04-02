@@ -26,6 +26,7 @@ public class AuthorDaoJdbc implements AuthorDao {
         }
         return instance;
     }
+
     @Override
     public void add(Author author) {
         Connection cursor = SQLConnection.getDb();
@@ -35,8 +36,8 @@ public class AuthorDaoJdbc implements AuthorDao {
         try {
             PreparedStatement prepAdd = cursor.prepareStatement(insertQuery,
                     ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
-            prepAdd.setString(1,authorName);
-            prepAdd.setString(2,authorName);
+            prepAdd.setString(1, authorName);
+            prepAdd.setString(2, authorName);
             prepAdd.execute();
 
         } catch (SQLException e) {
@@ -113,7 +114,6 @@ public class AuthorDaoJdbc implements AuthorDao {
                     ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
             prepAdd.setInt(1, authorId);
             prepAdd.execute();
-            System.out.println( "Author with id:" + authorId + "was deleted");
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -150,4 +150,5 @@ public class AuthorDaoJdbc implements AuthorDao {
         }
         return allAuthors;
     }
+
 }
