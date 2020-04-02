@@ -2,11 +2,9 @@ package com.codecool.shop.dao.implementation;
 
 import com.codecool.shop.config.SQLConnection;
 import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.model.Author;
 import com.codecool.shop.model.Genre;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.Recommender;
-import com.codecool.shop.dao.implementation.GenreDaoJdbc;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
