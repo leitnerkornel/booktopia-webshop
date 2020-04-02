@@ -3,6 +3,14 @@ package com.codecool.shop.model;
 import java.util.Currency;
 
 public class Product extends BaseModel {
+    // for the template
+    private Integer bookID;
+    private String authorName;
+    private String genreName;
+    private String recommenderName;
+
+
+
     private float defaultPrice;
     private Currency defaultCurrency;
     private Integer genre;
@@ -28,6 +36,44 @@ public class Product extends BaseModel {
         this.setGenreObj(genre);
         this.setAuthorObj(author);
         this.setRecommenderObj(recommender);
+    }
+
+    public Integer getBookID() {
+        return bookID;
+    }
+
+    public String getAuthorName() {
+        return authorName;
+    }
+
+    public String getGenreName() {
+        return genreName;
+    }
+
+    public String getRecommenderName() {
+        return recommenderName;
+    }
+
+    public Author getAuthorObj() {
+        return authorObj;
+    }
+
+    public Recommender getRecommenderObj() {
+        return recommenderObj;
+    }
+
+    // Constructor for the template (ProductDaoJdbc.getAll method will use this)
+    public Product(String name, String description, Integer bookID, float defaultPrice, Integer stock, Integer authorID, String authorName, Integer genreID, String genreName, Integer recommenderID, String recommenderName) {
+        super(name, description); // Book title, book description
+        this.bookID = bookID;
+        this.setPrice(defaultPrice,"USD");
+        this.setStock(stock);
+        this.author = authorID;
+        this.authorName = authorName;
+        this.genre = genreID;
+        this.genreName = genreName;
+        this.recommender = recommenderID;
+        this.recommenderName = recommenderName;
     }
 
     public float getDefaultPrice() {
