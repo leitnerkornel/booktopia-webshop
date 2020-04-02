@@ -82,7 +82,13 @@ let filterByGenre = function () {
     }
 };
 
-let increaseCartCount = function (author, title, price) {
+let addToCart = function (author, title, price) {
+    let currentValue = increaseCartNumber();
+    showInCart(author, title, price);
+    changeCartColor(currentValue);
+};
+
+let increaseCartNumber = function () {
     let counter = document.querySelector("#lblCartCount");
     let currentValue = parseInt(counter.innerHTML);
     if (currentValue === 0) {
@@ -91,8 +97,7 @@ let increaseCartCount = function (author, title, price) {
     }
     currentValue += 1;
     counter.innerHTML = currentValue.toString();
-    showInCart(author, title, price);
-    changeCartColor(currentValue);
+    return currentValue;
 };
 
 let showInCart = function (author, title, price) {
@@ -102,14 +107,14 @@ let showInCart = function (author, title, price) {
     cart.appendChild(newElement);
 };
 
-let addToCart = function () {
+let shoppingCart = function () {
     let buttons = document.querySelectorAll(".add-to-cart");
     for (let button of buttons) {
         let author = button.dataset.author;
         let title = button.dataset.title;
         let price = button.dataset.price;
         button.addEventListener("click", function () {
-            increaseCartCount(author, title, price);
+            addToCart(author, title, price);
         });
     }
 };
@@ -125,7 +130,7 @@ let changeCartColor = function (value) {
 
 const main = function () {
 
-    addToCart();
+    shoppingCart();
     filterByRecommender();
     filterByGenre();
 };
