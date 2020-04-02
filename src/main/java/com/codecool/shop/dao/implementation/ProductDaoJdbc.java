@@ -20,9 +20,6 @@ public class ProductDaoJdbc implements ProductDao {
     private List<Product> data = new ArrayList<>();
     private static ProductDaoJdbc instance = null;
 
-
-    /* A private Constructor prevents any other class from instantiating.
-     */
     private ProductDaoJdbc() {
     }
 
@@ -43,7 +40,6 @@ public class ProductDaoJdbc implements ProductDao {
             PreparedStatement prepAdd = cursor.prepareStatement(query,
                     ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
             prepAdd.setInt(1, product.getAuthor());
-            //String genreName = product.getGenre().getName();
             prepAdd.setInt(2, product.getGenre());
             prepAdd.setInt(3, product.getRecommender());
             prepAdd.setString(4, product.getName());
@@ -81,14 +77,29 @@ public class ProductDaoJdbc implements ProductDao {
         Connection cursor = SQLConnection.getDb();
 
         List<Product> allProducts = new ArrayList<>();
-        String query = "SELECT * FROM book";
+        String query = "SELECT\n" +
+                "    book.id,\n" +
+                "    book.title,\n" +
+                "    book.description,\n" +
+                "    book.price,\n" +
+                "    book.stock,\n" +
+                "    a.id AS authorID,\n" +
+                "    a.name AS authorName,\n" +
+                "    g.id AS genreID,\n" +
+                "    g.name AS genreName,\n" +
+                "    r.id AS recommenderID,\n" +
+                "    r.name AS recommenderName\n" +
+                "FROM book\n" +
+                "    JOIN author a ON book.author_id = a.id\n" +
+                "    JOIN genre g ON book.genre_id = g.id\n" +
+                "    JOIN recommender r ON book.recommender_id = r.id;";
         try {
             PreparedStatement prepAdd = cursor.prepareStatement(query,
                     ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
             ResultSet rs = prepAdd.executeQuery();
             while (rs.next()) {
-                //Product currentProduct = new Product(rs.getInt("id"), rs.getInt("author_id"), rs.getInt("genre_id"), rs.getInt("recommender_id"), rs.getString("title"), rs.getString("description"), Math.round(rs.getFloat("price")), rs.getInt("stock"));
-                //allProducts.add(currentProduct);
+                Product currentProduct = new Product(rs.getString("title"), rs.getString("description"), rs.getInt("id"), rs.getFloat("price"), rs.getInt("stock"), rs.getInt("authorID"), rs.getString("authorName"), rs.getInt("genreID"), rs.getString("genreName"), rs.getInt("recommenderID"), rs.getString("recommenderName"));
+                allProducts.add(currentProduct);
             }
         } catch (SQLException e) {
             e.printStackTrace();
