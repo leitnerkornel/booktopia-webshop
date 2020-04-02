@@ -112,24 +112,24 @@
 <div class="container">
     <div id="products" class="row">
         <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">
-            <div class="card not-selected" th:attr="class='card ' + ${prod.recommender.getName()} + ' ' + ${prod.genre.getName()}">
+            <div class="card not-selected" th:attr="class='card ' + ${prod.getRecommenderName()} + ' ' + ${prod.getGenreName()}">
                 <img class="book-image" src="http://placehold.it/400x250/000/fff"
-                     th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt=""/>
+                     th:attr="src='/static/img/product_' + ${prod.getBookID()} + '.jpg'" alt=""/>
                 <div class="card-header">
-                    <p class="card-title" th:text="${prod.name}">Product name</p>
+                    <p class="card-title" th:text="${prod.getName()}">Product name</p>
                 </div>
                 <div class="card-header-author">
-                    <p class="card-author" th:text="${prod.author.getName()}">Author name></p>
+                    <p class="card-author" th:text="${prod.getAuthorName()}">Author name></p>
                 </div>
                 <div class="card-description">
-                    <p class="card-desc" th:text="${prod.description}">Product description... </p>
+                    <p class="card-desc" th:text="${prod.getDescription()}">Product description... </p>
                 </div>
                 <div class="card-body">
                     <div class="card-price">
                         <p class="price-text" th:text="${prod.getPrice()}">100 USD</p>
                     </div>
                     <div class="card-text">
-                        <a class="btn btn-success add-to-cart" th:attr="data-author=${prod.author.getName()},data-title=${prod.name},data-price=${prod.getPrice()}">Add to cart</a>
+                        <a class="btn btn-success add-to-cart" th:attr="data-author=${prod.getAuthorName()},data-title=${prod.getName()},data-price=${prod.getPrice()}">Add to cart</a>
                     </div>
                 </div>
             </div>
