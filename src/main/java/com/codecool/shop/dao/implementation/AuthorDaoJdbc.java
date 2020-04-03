@@ -28,26 +28,24 @@ public class AuthorDaoJdbc implements AuthorDao {
     }
 
     @Override
-    public void add(Author author) {
-        Connection cursor = SQLConnection.getDb();
-        String authorName = author.getName();
+    public void add(Author author) throws DataSourceException {
+        if (author == null) {
+            throw new IllegalArgumentException("author cannot be null");
+        }
+        String authorName = author.?getName() ?? "anonymous";
         String insertQuery = "INSERT INTO author (name) SELECT ? WHERE NOT EXISTS(SELECT name FROM author WHERE name = ?)";
 
-        try {
-            PreparedStatement prepAdd = cursor.prepareStatement(insertQuery,
-                    ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
+        try (Connection cursor = SQLConnection.getDb();
+             PreparedStatement prepAdd =
+             cursor.prepareStatement(insertQuery,
+                                     ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
+             ) {
             prepAdd.setString(1, authorName);
             prepAdd.setString(2, authorName);
             prepAdd.execute();
 
         } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                cursor.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            throw new DataSourceException(e);
         }
     }
 

@@ -21,7 +21,7 @@ class RecommenderDaoJdbcTest {
 
     @Test
     void testGetAllElementsReturnsRecommenders() {
-        assertEquals(true, test.getAll().get(1) instanceof Recommender);
+        assertTrue(test.getAll().get(1) instanceof Recommender);
     }
 
 }

@@ -22,9 +22,21 @@ class AuthorDaoJdbcTest {
         test.remove(test.findByName("test Mike"));
     }
 
+    private static <T> void assertThrows(Class<T extends Throwable> exceptionType, Runnable callback) {
+        try {
+            callback.run();
+        }
+        catch (T e) {
+            assert(true);
+        } catch (Throwable e) {
+            assertEquals(e.getClass(), exceptionType);
+        }
+        assert(false);
+    }
+
     @Test
     void testAddWithInvalidArgument() {
-        assertThrows(NullPointerException.class, () -> {test.add(null);});
+        assertThrows(IllegalArgumentException.class, () -> {test.add(null);});
     }
 
     @Test

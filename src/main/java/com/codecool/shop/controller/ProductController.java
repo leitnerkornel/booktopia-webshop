@@ -18,7 +18,7 @@ public class ProductController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ProductDao productDataStoreDB = ProductDaoJdbc.getInstance();
+        ProductDao productDataStoreDB = DaoUtil.getProductDao();
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
@@ -29,6 +29,11 @@ public class ProductController extends HttpServlet {
         // params.put("products", productDataStore.getBy(productCategoryDataStore.find(1)));
         // context.setVariables(params);
         engine.process("product/index.html", context, resp.getWriter());
+    }
+
+    @Override
+    public void doPost(HttpServletRequest req, HttpServletResponse resp) {
+        // Handles POST requests for "/" route
     }
 
 }

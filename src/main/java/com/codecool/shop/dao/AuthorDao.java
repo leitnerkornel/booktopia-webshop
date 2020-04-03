@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface AuthorDao {
 
-    void add(Author author);
+    void add(Author author) throws DataSourceException;
     Integer findByName(String authorName);
     Author find(int id);
     void remove(int id);

@@ -62,21 +62,27 @@ public class Initializer implements ServletContextListener {
         Author georgeOrwell = new Author("George Orwell");
         Author tomSharpe = new Author("Tom Sharpe");
         Author richardScarry = new Author("Richard Scarry");
-        authorDataStoreDB.add(jeanDominiqueBauby);
-        authorDataStoreDB.add(nickCutter);
-        authorDataStoreDB.add(kurtVonnegut);
-        authorDataStoreDB.add(rASalvatore);
-        authorDataStoreDB.add(philipKDick);
-        authorDataStoreDB.add(joNesbo);
-        authorDataStoreDB.add(jKRowling);
-        authorDataStoreDB.add(danBrown);
-        authorDataStoreDB.add(agathaChristie);
-        authorDataStoreDB.add(jonasJonasson);
-        authorDataStoreDB.add(robertMerle);
-        authorDataStoreDB.add(ilfPetrov);
-        authorDataStoreDB.add(georgeOrwell);
-        authorDataStoreDB.add(tomSharpe);
-        authorDataStoreDB.add(richardScarry);
+        try {
+            authorDataStoreDB.add(jeanDominiqueBauby);
+            authorDataStoreDB.add(nickCutter);
+            authorDataStoreDB.add(kurtVonnegut);
+            authorDataStoreDB.add(rASalvatore);
+            authorDataStoreDB.add(philipKDick);
+            authorDataStoreDB.add(joNesbo);
+            authorDataStoreDB.add(jKRowling);
+            authorDataStoreDB.add(danBrown);
+            authorDataStoreDB.add(agathaChristie);
+            authorDataStoreDB.add(jonasJonasson);
+            authorDataStoreDB.add(robertMerle);
+            authorDataStoreDB.add(ilfPetrov);
+            authorDataStoreDB.add(georgeOrwell);
+            authorDataStoreDB.add(tomSharpe);
+            authorDataStoreDB.add(richardScarry);
+        }
+        catch (DataSourceException e) {
+            System.err.println("Couldn't add authors");
+            System.exit(1);
+        }
 
         for (Author author : authorDataStoreDB.getAll()) {
             authorDataStore.add(author);
