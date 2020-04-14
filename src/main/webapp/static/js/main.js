@@ -15,12 +15,13 @@ let selectByOrderOption = function (optionName, cards) {
     for (let card of cards) {
         if (isValidOrderOption(optionName)) {
             if (!card.classList.contains(optionName)) {
-                card.classList.add("not-selected");
+                //card.classList.add("not-selected");
+                card.parentElement.classList.add("not-selected");
             } else {
-                card.classList.remove("not-selected");
+                card.parentElement.classList.remove("not-selected");
             }
         } else {
-            card.classList.remove("not-selected");
+            card.parentElement.classList.remove("not-selected");
         }
     }
 };
