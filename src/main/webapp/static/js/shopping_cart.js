@@ -1,8 +1,12 @@
+import {postData} from "./data_manager.js";
+
 export let shoppingCart = {
     addToCart: function (bookID, author, title, price) {
         let currentValue = shoppingCart.increaseCartNumber();
         shoppingCart.showInCart(bookID, author, title, price);
         shoppingCart.changeCartColor(currentValue);
+        let item = {id: bookID, author: author, title: title, price: price};
+        postData("/shopping-cart)", item); // Not complete!
 
     },
     increaseCartNumber: function () {
