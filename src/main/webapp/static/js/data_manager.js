@@ -1,24 +1,24 @@
 export function postData(url = "", data = {}) {
     console.log("Posted");
-    const response = fetch(url, {
-        method: 'GET',
+    fetch(url, {
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)
-    });
+    }).then(r => {return  r.json()}).then(data => console.log(`Callback ${data}`));
 }
 
 /*
 export function postData(url = '', data = {}) {
     // Default options are marked with *
     const response = fetch(url, {
-        method: 'GET', // *GET, POST, PUT, DELETE, etc.
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(data) // body data type must match "Content-Type" header
-    });}*!/
+    });}
 
 export function postData(url, data) {
 
