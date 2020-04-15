@@ -6,8 +6,7 @@ export let shoppingCart = {
         shoppingCart.showInCart(bookID, author, title, price);
         shoppingCart.changeCartColor(currentValue);
         let item = {id: bookID, author: author, title: title, price: price};
-        postData("/shopping-cart)", item); // Not complete!
-
+        postData("/shoppingCart", item);
     },
     increaseCartNumber: function () {
         let counter = document.querySelector("#lblCartCount");
