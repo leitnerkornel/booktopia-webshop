@@ -23,15 +23,15 @@ public class SQLConnection {
     }
 
     private void connectToDb () {
-        Properties property = new Properties();
+        /*Properties property = new Properties();
         property.setProperty("user", user);
         property.setProperty("password", password);
         try {
             cursor = DriverManager.getConnection(url, property);
         } catch (SQLException e) {
             e.printStackTrace();
-        }
-        /*try
+        }*/
+        try
         {
             Properties props = new Properties();
 
@@ -42,33 +42,32 @@ public class SQLConnection {
 
             String dbDriverClass = props.getProperty("db.driver.class");
 
-            String dbConnUrl = props.getProperty("url");
+            String url = props.getProperty("url");
 
             String dbUserName = props.getProperty("user");
 
             String dbPassword = props.getProperty("password");
 
-            if(!"".equals(dbDriverClass) && !"".equals(dbConnUrl))
+            if(!"".equals(dbDriverClass) && !"".equals(url))
             {
                 Class.forName(dbDriverClass);
 
-                Connection dbConn = DriverManager.getConnection(dbConnUrl, dbUserName, dbPassword);
+                Connection dbConn = DriverManager.getConnection(url, dbUserName, dbPassword);
 
-                DatabaseMetaData dbMetaData = dbConn.getMetaData();
-
-                String dbName = dbMetaData.getDatabaseProductName();
-
-                String dbVersion = dbMetaData.getDatabaseProductVersion();
-
-                System.out.println("Database Name : " + dbName);
-
-                System.out.println("Database Version : " + dbVersion);
+                Properties property = new Properties();
+                property.setProperty("user", user);
+                property.setProperty("password", password);
+                try {
+                    cursor = DriverManager.getConnection(url, property);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
 
         }catch(Exception ex)
         {
             ex.printStackTrace();
-        }*/
+        }
     }
 
     public static Connection getDb() {
