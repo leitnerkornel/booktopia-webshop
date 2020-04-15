@@ -147,6 +147,7 @@ public class Initializer implements ServletContextListener {
         productDataStore.add(new Product("The Wilt Alternative", 8.99f, "USD", "In this, the second of Tom Sharpe's chronicles about Henry Wilt, our hero is no longer the victim of his own uncontrolled fantasies. He becomes the unintentional participant in a terrorist siege that he is forced to find an answer to the problems of power, which have corrupted greater men than he.", satireId, gaborID, tomSharpeID));
         productDataStore.add(new Product("Busytown", 12.89f, "USD", "Busytown is a fictional town depicted in several books by the children's author Richard Scarry. Busytown is inhabited by an assortment of anthropomorphic animals, including Huckle Cat, Lowly Worm, Mr. Frumble, police Sergeant Murphy, Mr. Fixit, Bananas Gorilla and Hilda Hippo.", childrensBookId, gaborID, richardScarryID));
 
+        productDataStore.add(new Product("PRE_ORDER - Toilet paper origami", 12.89f, "USD", "Useful skill for the time of quarantine", thrillerId, gaborID, richardScarryID));
         // Store products (books) in the database - Missing parameters
         for (Product product: productDataStore.getAll()) {
             productDataStoreDB.add(product);
