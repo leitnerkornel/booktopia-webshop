@@ -23,7 +23,7 @@ export let filters = {
         }
     },
     isValidOrderOption: function (orderOption) {
-        const recommenders = new Set(['Gabor', 'Kornel', 'Peti']);
+        const recommenders = new Set(['Gabor', 'Kornel', 'Peti', 'Olic']);
         const genres = new Set(["Thriller", "Satire", "Fantasy", "Childrens"]);
         return recommenders.has(orderOption) || genres.has(orderOption);
     }

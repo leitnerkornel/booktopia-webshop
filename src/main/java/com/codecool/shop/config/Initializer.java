@@ -39,10 +39,13 @@ public class Initializer implements ServletContextListener {
         supplierDataStoreDB.add(kornel);
         Recommender gabor = new Recommender("Gabor");
         supplierDataStoreDB.add(gabor);
+        Recommender olic = new Recommender("Olic");
+        supplierDataStoreDB.add(olic);
 
         Integer petiID = supplierDataStoreDB.findByName(peti.getName());
         Integer kornelID = supplierDataStoreDB.findByName(kornel.getName());
         Integer gaborID = supplierDataStoreDB.findByName(gabor.getName());
+        Integer olicID = supplierDataStoreDB.findByName(olic.getName());
 
 
 
@@ -62,6 +65,7 @@ public class Initializer implements ServletContextListener {
         Author georgeOrwell = new Author("George Orwell");
         Author tomSharpe = new Author("Tom Sharpe");
         Author richardScarry = new Author("Richard Scarry");
+        Author georgeRRMartin = new Author("George R. R. Martin");
         authorDataStoreDB.add(jeanDominiqueBauby);
         authorDataStoreDB.add(nickCutter);
         authorDataStoreDB.add(kurtVonnegut);
@@ -77,6 +81,7 @@ public class Initializer implements ServletContextListener {
         authorDataStoreDB.add(georgeOrwell);
         authorDataStoreDB.add(tomSharpe);
         authorDataStoreDB.add(richardScarry);
+        authorDataStoreDB.add(georgeRRMartin);
 
         for (Author author : authorDataStoreDB.getAll()) {
             authorDataStore.add(author);
@@ -97,6 +102,7 @@ public class Initializer implements ServletContextListener {
         Integer georgeOrwellID = authorDataStoreDB.findByName(georgeOrwell.getName());
         Integer tomSharpeID = authorDataStoreDB.findByName(tomSharpe.getName());
         Integer richardScarryID = authorDataStoreDB.findByName(richardScarry.getName());
+        Integer georgeRRMartingID = authorDataStoreDB.findByName(georgeRRMartin.getName());
 
 
 
@@ -148,6 +154,10 @@ public class Initializer implements ServletContextListener {
         productDataStore.add(new Product("Busytown", 12.89f, "USD", "Busytown is a fictional town depicted in several books by the children's author Richard Scarry. Busytown is inhabited by an assortment of anthropomorphic animals, including Huckle Cat, Lowly Worm, Mr. Frumble, police Sergeant Murphy, Mr. Fixit, Bananas Gorilla and Hilda Hippo.", childrensBookId, gaborID, richardScarryID));
 
         productDataStore.add(new Product("PRE_ORDER - Toilet paper origami", 12.89f, "USD", "Useful skill for the time of quarantine", thrillerId, gaborID, richardScarryID));
+
+        // Olic
+        productDataStore.add(new Product("The World of Ice & Fire", 20.05f, "USD", "THE WORLD OF ICE AND FIRE. This lavishly illustrated volume is a comprehensive history of the Seven Kingdoms, providing vividly constructed accounts of the epic battles, bitter rivalries, and daring rebellions that lead to the events of A Song of Ice and Fire and HBO's Game of Thrones.", fantasyId, olicID, georgeRRMartingID));
+        productDataStore.add(new Product("Digital Fortress", 15.25f, "USD", "Digital Fortress is a techno-thriller novel written by American author Dan Brown and published in 1998 by St. Martin's Press. The book explores the theme of government surveillance of electronically stored information on the private lives of citizens, and the possible civil liberties and ethical implications of using such technology.", thrillerId, olicID, danBrownID));
         // Store products (books) in the database - Missing parameters
         for (Product product: productDataStore.getAll()) {
             productDataStoreDB.add(product);
