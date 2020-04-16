@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 
-@WebServlet(urlPatterns = {"/checkout"})
+@WebServlet(urlPatterns = {"/payment"})
 public class PaymentController extends HttpServlet {
 
     @Override
