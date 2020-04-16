@@ -108,7 +108,13 @@ export let shoppingCart = {
             cartIcon.classList.remove('cart-color-change');
         }
     },
+    setCartColorAtStart: function () {
+        let counter = document.querySelector("#lblCartCount");
+        let currentValue = parseInt(counter.innerHTML);
+        shoppingCart.changeCartColor(currentValue);
+    },
     shoppingCartMain: function () {
+        shoppingCart.setCartColorAtStart();
         let buttons = document.querySelectorAll(".add-to-cart");
         for (let button of buttons) {
             let bookID = button.dataset.bookid;
