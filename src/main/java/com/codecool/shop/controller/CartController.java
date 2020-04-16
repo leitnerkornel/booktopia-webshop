@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import com.google.gson.Gson;
@@ -26,6 +27,7 @@ public class CartController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+
         String param = req.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
         CartDataContainer cartDataContainer = new Gson().fromJson(param, CartDataContainer.class);
         int bookId = Integer.parseInt(cartDataContainer.getId());
@@ -34,9 +36,8 @@ public class CartController extends HttpServlet {
         String price = cartDataContainer.getPrice();
         System.out.println(bookId + author + title + price);
 
-        CartItem cartItem = new CartItem(bookId);
-
         CartDaoJdbc cartDataStoreDB = CartDaoJdbc.getInstance();
+        CartItem cartItem = new CartItem(bookId);
 
         try {
             cartDataStoreDB.add(cartItem);
@@ -44,6 +45,8 @@ public class CartController extends HttpServlet {
             System.err.println("Couldn't add new cart entry.");
             System.exit(1);
         }
+
+        //Cart dao's place
 
         String responseJSON = new Gson().toJson("Was success from CartController");
 

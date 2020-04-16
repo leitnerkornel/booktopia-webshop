@@ -11,5 +11,5 @@ public interface CartDao {
     void removeItemById(int id);
     void clearCart();
 
-    List<CartItem> getAll();
+    List<CartItem> getAll() throws DataSourceException;
 }

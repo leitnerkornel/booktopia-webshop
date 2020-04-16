@@ -3,6 +3,7 @@ package com.codecool.shop.dao.implementation;
 import com.codecool.shop.config.SQLConnection;
 import com.codecool.shop.dao.CartDao;
 import com.codecool.shop.dao.DataSourceException;
+import com.codecool.shop.model.Author;
 import com.codecool.shop.model.CartItem;
 
 import java.sql.*;
@@ -71,7 +72,36 @@ public class CartDaoJdbc implements CartDao {
     }
 
     @Override
-    public List<CartItem> getAll() {
-        return null;
+    public List<CartItem> getAll() throws DataSourceException {
+        List<CartItem> allCartItem = new ArrayList<>();
+        Connection cursor = SQLConnection.getDb();
+        String query = "SELECT\n" +
+                "c.id AS cart_id,\n" +
+                "b.id AS book_id,\n" +
+                "a.name AS author_name,\n" +
+                "b.title AS title,\n" +
+                "b.price AS price,\n" +
+                "c.quantity AS quantity,\n" +
+                "c.quantity * b.price AS sub_total\n" +
+                "FROM cart c JOIN book b on c.book_id = b.id JOIN author a on b.author_id = a.id\n" +
+                "ORDER BY c.id;";
+        try (PreparedStatement prepQuery = cursor.prepareStatement(query,
+                ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE)) {
+            ResultSet rs = prepQuery.executeQuery();
+            while (rs.next()) {
+                Integer cID = rs.getInt("cart_id");
+                Integer bID = rs.getInt("book_id");
+                String author = rs.getString("author_name");
+                String title = rs.getString("title");
+                Double price = rs.getDouble("price");
+                Integer quantity = rs.getInt("quantity");
+                Double total = rs.getDouble("sub_total");
+                allCartItem.add(new CartItem(cID, bID, author, title, price, quantity, total));
+            }
+        } catch (SQLException e) {
+            throw new DataSourceException(e);
+        }
+        return allCartItem;
     }
 }
+
