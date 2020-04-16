@@ -48,9 +48,15 @@ input[type=text] {
     width: 100%;
     margin-bottom: 20px;
     padding: 12px;
-    border: 1px solid #ccc;
     border-radius: 3px;
+    outline: 0;
+    border-width: 0 0 2px;
+    border-color: blue
 }
+input:focus {
+    border-color: lightgreen;
+}
+
 
 label {
     margin-bottom: 10px;
