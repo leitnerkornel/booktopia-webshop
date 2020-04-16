@@ -98,9 +98,6 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <!--<div class="modal-body items-in-cart">
-                <p class="empty-cart-text">Your cart is empty!</p>
-            </div>-->
             <div class="modal-body items-in-cart">
                 <th:block th:switch="${cartItems.size()}">
                     <p th:case="0" class="empty-cart-text">Your cart is empty!</p>
@@ -118,7 +115,7 @@
                                     <p class="author-in-cart" th:text="${cartItem.getAuthorName()}">Author</p>
                                     <p class="title-in-cart" th:text="${cartItem.getTitle()}"></p>
                                 </div>
-                                <div class="price-in-cart" th:text="${cartItem.getPrice()}">Price</div>
+                                <div class="price-in-cart" th:text="${#numbers.formatDecimal(cartItem.getPrice(), 0, 2)} + ' USD'">Price</div>
                                 <div class="count-in-cart" th:text="${cartItem.getQuantity()}">Quantity</div>
                             </div>
                         </th:block>

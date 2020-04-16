@@ -13,8 +13,10 @@ export let shoppingCart = {
         let currentValue = parseInt(counter.innerHTML);
         if (currentValue === 0) {
             let cart = document.querySelector(".items-in-cart");
-            cart.querySelector(".empty-cart-text").remove();
-            shoppingCart.createCartHeader(cart);
+            if (cart.querySelector(".empty-cart-text") !== null) {
+                cart.querySelector(".empty-cart-text").remove();
+                shoppingCart.createCartHeader(cart);
+            }
         }
         currentValue += 1;
         counter.innerHTML = currentValue.toString();
