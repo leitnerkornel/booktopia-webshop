@@ -8,7 +8,7 @@ function backToShippingINfo() {
 function finalizeOrder() {
     let payButton = document.querySelector(".payBtn");
     payButton.addEventListener("click", function () {
-        alert("Jól van, ügyes vagy!");
+        alert("Guadalupei Szent Szűzanya áldja meg rendelésed!");
     })
 }
 

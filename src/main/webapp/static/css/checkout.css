@@ -2,8 +2,27 @@ body {
     font-family: Arial;
     font-size: 17px;
     padding: 8px;
-    background-color: antiquewhite;
 }
+
+.background {
+    size: auto;
+    display: block;
+    alignment: center;
+}
+
+.background::after {
+    content: "";
+    background: url("/static/img/BgLibrary.jpg") center no-repeat;
+    background-size: 100%;
+    opacity: 0.8;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
+}
+
 
 * {
     box-sizing: border-box;
@@ -39,7 +58,7 @@ body {
 }
 
 .container {
-    background-color: #f2f2f2;
+    background-color: rgba(255,255,255,0.5);
     padding: 5px 20px 15px 20px;
     border: 1px solid lightgrey;
     border-radius: 3px;
