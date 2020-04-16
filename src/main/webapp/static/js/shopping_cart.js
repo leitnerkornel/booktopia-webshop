@@ -1,5 +1,12 @@
 import {postData} from "./data_manager.js";
 
+function continueToCheckout() {
+    let checkoutButton = document.querySelector(".checkout-cart");
+    checkoutButton.addEventListener("click", function () {
+        window.location = "/checkout";
+    })
+}
+
 export let shoppingCart = {
     addToCart: function (bookID, author, title, price) {
         let currentValue = shoppingCart.increaseCartNumber();
@@ -107,6 +114,7 @@ export let shoppingCart = {
         }
     },
     shoppingCartMain: function () {
+        continueToCheckout();
         let buttons = document.querySelectorAll(".add-to-cart");
         for (let button of buttons) {
             let bookID = button.dataset.bookid;
