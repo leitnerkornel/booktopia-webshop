@@ -8,7 +8,7 @@ function backToMain() {
 function toPayment() {
     let payButton = document.querySelector(".payBtn");
     payButton.addEventListener("click", function () {
-        console.log("To summary and accept");
+        window.location = "/payment";
     })
 }
 

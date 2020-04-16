@@ -2,6 +2,7 @@ body {
     font-family: Arial;
     font-size: 17px;
     padding: 8px;
+    background-color: antiquewhite;
 }
 
 * {
@@ -27,8 +28,8 @@ body {
 }
 
 .col-75 {
-    -ms-flex: 75%;
-    flex: 75%;
+    -ms-flex: 40%;
+    flex: 40%;
 }
 
 .col-25,
