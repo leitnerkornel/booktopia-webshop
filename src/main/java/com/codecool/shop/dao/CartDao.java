@@ -8,6 +8,7 @@ import java.util.List;
 public interface CartDao {
 
     void add(CartItem item) throws DataSourceException;
+    int itemsInCart() throws DataSourceException;
     void removeItemById(int id);
     void clearCart();
 

@@ -3,7 +3,6 @@ package com.codecool.shop.dao.implementation;
 import com.codecool.shop.config.SQLConnection;
 import com.codecool.shop.dao.CartDao;
 import com.codecool.shop.dao.DataSourceException;
-import com.codecool.shop.model.Author;
 import com.codecool.shop.model.CartItem;
 
 import java.sql.*;
@@ -59,6 +58,24 @@ public class CartDaoJdbc implements CartDao {
         } catch (SQLException e) {
             throw new DataSourceException(e);
         }
+    }
+
+    @Override
+    public int itemsInCart() throws DataSourceException{
+        int itemsInCart = 0;
+        Connection cursor = SQLConnection.getDb();
+
+        String query = "SELECT SUM(quantity) AS items_in_cart FROM cart;";
+        try (PreparedStatement prepQuery = cursor.prepareStatement(query,
+                ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE)) {
+            ResultSet rs = prepQuery.executeQuery();
+            while (rs.next()) {
+                itemsInCart = rs.getInt("items_in_cart");
+            }
+        } catch (SQLException e) {
+            throw new DataSourceException(e);
+        }
+        return itemsInCart;
     }
 
     @Override

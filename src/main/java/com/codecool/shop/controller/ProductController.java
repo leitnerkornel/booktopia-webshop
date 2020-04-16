@@ -26,15 +26,19 @@ public class ProductController extends HttpServlet {
         ProductDao productDataStoreDB = ProductDaoJdbc.getInstance();
         CartDaoJdbc cartDataStoreDB = CartDaoJdbc.getInstance();
         List<CartItem> allCartItem = new ArrayList<>();
+        int itemsInCart = 0;
 
         try {
             allCartItem = cartDataStoreDB.getAll();
-            System.out.println(allCartItem.size());
-            for (CartItem item : allCartItem) {
-                System.out.println(item.toString());
-            }
         } catch (DataSourceException e) {
             System.err.println("Unable to reach all cart entries.");
+            System.exit(1);
+        }
+
+        try {
+            itemsInCart = cartDataStoreDB.itemsInCart();
+        } catch (DataSourceException e) {
+            System.err.println("Unable to reach the number of cart entries.");
             System.exit(1);
         }
 
@@ -42,6 +46,7 @@ public class ProductController extends HttpServlet {
         WebContext context = new WebContext(req, resp, req.getServletContext());
         context.setVariable("products", productDataStoreDB.getAll());
         context.setVariable("cartItems", allCartItem);
+        context.setVariable("cartItemCounter", itemsInCart);
         // // Alternative setting of the template context
         // Map<String, Object> params = new HashMap<>();
         // params.put("category", productCategoryDataStore.find(1));

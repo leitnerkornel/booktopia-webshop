@@ -79,7 +79,7 @@
         </ul>
         <div class="cart-container">
             <i class="fas fa-shopping-cart fa-2x" data-toggle="modal" data-target="#cartModal"></i>
-            <span class='badge badge-warning' id='lblCartCount' data-toggle="modal" data-target="#cartModal"> 0 </span>
+            <span class='badge badge-warning' id='lblCartCount' data-toggle="modal" data-target="#cartModal" th:text="${cartItemCounter}"> Cart Item Counter </span>
         </div>
         <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
