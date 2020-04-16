@@ -66,6 +66,9 @@ public class Initializer implements ServletContextListener {
         Author tomSharpe = new Author("Tom Sharpe");
         Author richardScarry = new Author("Richard Scarry");
         Author georgeRRMartin = new Author("George R. R. Martin");
+        Author antoineDeSaintExupery = new Author("Antoine de Saint-Exupéry");
+        Author voltaire = new Author("Voltaire");
+        Author blakeCrouch = new Author("Blake Crouch");
         authorDataStoreDB.add(jeanDominiqueBauby);
         authorDataStoreDB.add(nickCutter);
         authorDataStoreDB.add(kurtVonnegut);
@@ -82,6 +85,9 @@ public class Initializer implements ServletContextListener {
         authorDataStoreDB.add(tomSharpe);
         authorDataStoreDB.add(richardScarry);
         authorDataStoreDB.add(georgeRRMartin);
+        authorDataStoreDB.add(antoineDeSaintExupery);
+        authorDataStoreDB.add(voltaire);
+        authorDataStoreDB.add(blakeCrouch);
 
         for (Author author : authorDataStoreDB.getAll()) {
             authorDataStore.add(author);
@@ -103,6 +109,9 @@ public class Initializer implements ServletContextListener {
         Integer tomSharpeID = authorDataStoreDB.findByName(tomSharpe.getName());
         Integer richardScarryID = authorDataStoreDB.findByName(richardScarry.getName());
         Integer georgeRRMartingID = authorDataStoreDB.findByName(georgeRRMartin.getName());
+        Integer antoineDeSaintExuperyID = authorDataStoreDB.findByName(antoineDeSaintExupery.getName());
+        Integer voltaireID = authorDataStoreDB.findByName(voltaire.getName());
+        Integer blakeCrouchID = authorDataStoreDB.findByName(blakeCrouch.getName());
 
 
 
@@ -158,6 +167,9 @@ public class Initializer implements ServletContextListener {
         // Olic
         productDataStore.add(new Product("The World of Ice & Fire", 20.05f, "USD", "THE WORLD OF ICE AND FIRE. This lavishly illustrated volume is a comprehensive history of the Seven Kingdoms, providing vividly constructed accounts of the epic battles, bitter rivalries, and daring rebellions that lead to the events of A Song of Ice and Fire and HBO's Game of Thrones.", fantasyId, olicID, georgeRRMartingID));
         productDataStore.add(new Product("Digital Fortress", 15.25f, "USD", "Digital Fortress is a techno-thriller novel written by American author Dan Brown and published in 1998 by St. Martin's Press. The book explores the theme of government surveillance of electronically stored information on the private lives of citizens, and the possible civil liberties and ethical implications of using such technology.", thrillerId, olicID, danBrownID));
+        productDataStore.add(new Product("The Little Prince", 7.10f, "USD", "The Little Prince is a novella by French aristocrat, writer, and aviator Antoine de Saint-Exupéry. It was first published in English and French in the US by Reynal & Hitchcock in April 1943, and posthumously in France following the liberation of France as Saint-Exupéry's works had been banned by the Vichy Regime.", childrensBookId, olicID, antoineDeSaintExuperyID));
+        productDataStore.add(new Product("Candide", 5.15f, "USD", "Candide, satirical novel published in 1759 that is the best-known work by Voltaire. It is a savage denunciation of metaphysical optimism—as espoused by the German philosopher Gottfried Wilhelm Leibniz—that reveals a world of horrors and folly.", satireId, olicID, voltaireID));
+        productDataStore.add(new Product("Dark Matter", 15.50f, "USD", "Are you happy in your life? Those are the last words Jason Dessen hears before the masked abductor knocks him unconscious. Before he wakes to find himself strapped to a gurney, surrounded by strangers in hazmat suits. Before the man he is never met smiles down at him and says, Welcome back, my friend...", thrillerId, olicID, blakeCrouchID));
         // Store products (books) in the database - Missing parameters
         for (Product product: productDataStore.getAll()) {
             productDataStoreDB.add(product);
