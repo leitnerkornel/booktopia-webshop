@@ -7,6 +7,7 @@ import com.sun.tools.sjavac.server.RequestHandler;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 import org.slf4j.Logger;
+import org.apache.log4j.BasicConfigurator;
 import org.slf4j.LoggerFactory;
 
 
@@ -29,6 +30,8 @@ public class CartController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
+        BasicConfigurator.configure();
+        System.out.println(logger.isTraceEnabled());
         logger.trace("Tracing");
         logger.debug("debugging");
         logger.info("this is info");
