@@ -312,11 +312,20 @@ h5 {
 .price-in-cart {
     padding-top: 30px;
     width: 100px;
+    font-size: 16px;
+}
+
+.subtotal-in-cart {
+    padding-top: 30px;
+    width: 100px;
+    margin-left: 40px;
+    font-size: 16px;
 }
 
 .count-in-cart {
     margin-left: 20px;
     padding-top: 30px;
+    font-size: 16px;
 }
 
 .empty-cart-text {
@@ -346,6 +355,30 @@ h5 {
     margin-left: 35px;
     text-align: center;
     font-style: italic;
+}
+
+.cart-subtotal-header {
+    margin-left: 40px;
+    text-align: center;
+    font-style: italic;
+}
+
+.cart-action-buttons-container {
+    margin-top: 25px;
+}
+
+.cart-increase-button {
+    background: green;
+}
+
+.cart-decrease-button {
+    background: red;
+    margin-left: 3px;
+}
+
+.cart-delete-button {
+    background: red;
+    margin-left: 3px;
 }
 
 

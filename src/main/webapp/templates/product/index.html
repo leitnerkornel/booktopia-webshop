@@ -106,6 +106,7 @@
                             <div class="cart-product-header">Product</div>
                             <div class="cart-price-header">Price</div>
                             <div class="cart-quantity-header">Quantity</div>
+                            <div class="cart-subtotal-header">Subtotal</div>
                         </div>
                         <th:block th:each="cartItem, iterStat : ${cartItems}">
                             <div class="item-div" th:attr="data-bookidcart=${cartItem.getBookID()}">
@@ -117,6 +118,7 @@
                                 </div>
                                 <div class="price-in-cart" th:text="${#numbers.formatDecimal(cartItem.getPrice(), 0, 2)} + ' USD'">Price</div>
                                 <div class="count-in-cart" th:text="${cartItem.getQuantity()}">Quantity</div>
+                                <div class="subtotal-in-cart" th:text="${#numbers.formatDecimal(cartItem.getSubtotal(), 0, 2)} + ' USD'">Subtotal</div>
                             </div>
                         </th:block>
                     </th:block>
