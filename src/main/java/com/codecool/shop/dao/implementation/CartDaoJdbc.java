@@ -4,10 +4,8 @@ import com.codecool.shop.config.SQLConnection;
 import com.codecool.shop.dao.CartDao;
 import com.codecool.shop.dao.DataSourceException;
 import com.codecool.shop.model.CartItem;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,15 +30,30 @@ public class CartDaoJdbc implements CartDao {
             throw new IllegalArgumentException("CartItem cannot be null");
         }
         Integer bookID = item.getBookID();
-        String insertQuery = "INSERT INTO cart (book_id) VALUES (?)";
+        String updateQuery = "UPDATE cart SET quantity = quantity + '1' WHERE book_id=?;";
+        String insertQuery = "INSERT INTO cart (book_id) SELECT ? WHERE NOT EXISTS (SELECT ? FROM cart WHERE book_id = ?)";
 
         try (Connection cursor = SQLConnection.getDb();
-             PreparedStatement prepAdd =
+             PreparedStatement prepUpdate =
+                     cursor.prepareStatement(updateQuery,
+                             ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE)
+        ) {
+            prepUpdate.setInt(1, bookID);
+            prepUpdate.execute();
+
+        } catch (SQLException e) {
+            throw new DataSourceException(e);
+        }
+
+        try (Connection cursor = SQLConnection.getDb();
+             PreparedStatement prepInsert =
                      cursor.prepareStatement(insertQuery,
                              ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE)
         ) {
-            prepAdd.setInt(1, bookID);
-            prepAdd.execute();
+            prepInsert.setInt(1, bookID);
+            prepInsert.setInt(2, bookID);
+            prepInsert.setInt(3, bookID);
+            prepInsert.execute();
 
         } catch (SQLException e) {
             throw new DataSourceException(e);
@@ -52,25 +65,6 @@ public class CartDaoJdbc implements CartDao {
 
     }
 
-    @Override
-    public boolean isInCartAlready(Integer bookID) throws DataSourceException {
-        return true;
-    }
-    /*
-        String insertQuery = "INSERT INTO cart (book_id) VALUES (?)";
-
-        try (Connection cursor = SQLConnection.getDb();
-             PreparedStatement prepAdd =
-                     cursor.prepareStatement(insertQuery,
-                             ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
-        ) {
-            prepAdd.setInt(1, bookID);
-            prepAdd.execute();
-
-        } catch (SQLException e) {
-            throw new DataSourceException(e);
-        }
-    }*/
     @Override
     public void clearCart() {
 

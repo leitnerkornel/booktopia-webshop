@@ -9,8 +9,6 @@ public interface CartDao {
 
     void add(CartItem item) throws DataSourceException;
     void removeItemById(int id);
-    boolean isInCartAlready(Integer bookID) throws DataSourceException;
-
     void clearCart();
 
     List<CartItem> getAll();
