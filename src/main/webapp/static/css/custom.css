@@ -368,17 +368,32 @@ h5 {
 }
 
 .cart-increase-button {
-    background: green;
+    background: rgb(37 172 102);
+    width: 30px;
+    height: 30px;
+    border: whitesmoke solid 2px;
+    border-radius: 8px;
+    font-weight: bolder;
 }
 
 .cart-decrease-button {
-    background: red;
+    background: rgb(56 156 208);
     margin-left: 3px;
+    width: 30px;
+    height: 30px;
+    border: whitesmoke solid 2px;
+    border-radius: 8px;
+    font-weight: bolder;
 }
 
 .cart-delete-button {
-    background: red;
+    background: #d03936;
     margin-left: 3px;
+    width: 50px;
+    height: 30px;
+    border: whitesmoke solid 2px;
+    border-radius: 8px;
+    font-weight: bolder;
 }
 
 

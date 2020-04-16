@@ -81,7 +81,7 @@ export let shoppingCart = {
 
         increaseButton.innerHTML = "+";
         decreaseButton.innerHTML = "-";
-        removeRowButton.innerHTML = "X";
+        removeRowButton.innerHTML = "x";
 
         authorP.classList.add("author-in-cart");
         titleP.classList.add("title-in-cart");

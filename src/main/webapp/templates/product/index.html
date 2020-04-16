@@ -119,6 +119,11 @@
                                 <div class="price-in-cart" th:text="${#numbers.formatDecimal(cartItem.getPrice(), 0, 2)} + ' USD'">Price</div>
                                 <div class="count-in-cart" th:text="${cartItem.getQuantity()}">Quantity</div>
                                 <div class="subtotal-in-cart" th:text="${#numbers.formatDecimal(cartItem.getSubtotal(), 0, 2)} + ' USD'">Subtotal</div>
+                                <div class="cart-action-buttons-container">
+                                    <button class="cart-increase-button">+</button>
+                                    <button class="cart-decrease-button">-</button>
+                                    <button class="cart-delete-button">x</button>
+                                </div>
                             </div>
                         </th:block>
                     </th:block>
