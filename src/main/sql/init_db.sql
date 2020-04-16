@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS book;
 DROP TABLE IF EXISTS author;
 DROP TABLE IF EXISTS genre;
 DROP TABLE IF EXISTS recommender;
+DROP TABLE IF EXISTS cart;
 
 CREATE TABLE genre
 (
@@ -31,4 +32,11 @@ CREATE TABLE book
     description    VARCHAR(2000),
     price          FLOAT,
     stock          INTEGER DEFAULT 1
+);
+
+CREATE TABLE cart
+(
+    id SERIAL PRIMARY KEY,
+    book_id INTEGER REFERENCES book (id),
+    quantity INTEGER DEFAULT 1
 );

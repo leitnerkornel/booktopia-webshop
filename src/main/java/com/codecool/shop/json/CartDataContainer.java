@@ -1,6 +1,6 @@
-package com.codecool.shop.controller;
+package com.codecool.shop.json;
 
-public class RequestIdContainer {
+public class CartDataContainer {
     public String id;
     public String author;
     public String title;
