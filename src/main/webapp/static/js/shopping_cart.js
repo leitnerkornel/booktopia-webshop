@@ -2,8 +2,15 @@ import {postData} from "./data_manager.js";
 
 function continueToCheckout() {
     let checkoutButton = document.querySelector(".checkout-cart");
+    let cartWithBook = document.querySelector(".cart-color-change");
+    console.log(cartWithBook);
     checkoutButton.addEventListener("click", function () {
-        window.location = "/checkout";
+        console.log(cartWithBook + "after");
+        if (cartWithBook == null) {
+            alert("You have to choose a book first");
+        } else {
+            window.location = "/checkout";
+        }
     })
 }
 
