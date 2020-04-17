@@ -13,7 +13,6 @@
 <img class="cover" src="http://placehold.it/400x250/000/fff"
      th:attr="src='/static/img/cover_books.png'" alt=""/>
 
-<div class="background"></div>
 
 <div class="row">
     <div class="col-75">
@@ -30,7 +29,7 @@
                             <i class="fa fa-cc-mastercard" style="color:red;"></i>
                         </div>
                         <label for="cname">Name on Card</label>
-                        <input type="text" id="cname" name="cardname" placeholder="John More Doe" autocomplete="chrome-off" required>
+                        <input type="text" id="cname" name="cardname" placeholder="John More Doe" autocomplete="false" required>
                         <label for="ccnum">Credit card number</label>
                         <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444" autocomplete="chrome-off" required>
                         <label for="expmonth">Exp Month</label>
@@ -48,8 +47,8 @@
                     </div>
 
                 </div>
-                <input type="submit" value="Finalize Order" class="btn payBtn">
                 <input type="button" value="Back to Shipping Info" class="btn backBtn">
+                <input type="submit" value="Confirm" class="btn payBtn">
             </form>
         </div>
     </div>

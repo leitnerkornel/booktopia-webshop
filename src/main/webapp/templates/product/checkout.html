@@ -13,7 +13,6 @@
 <img class="cover" src="http://placehold.it/400x250/000/fff"
      th:attr="src='/static/img/cover_books.png'" alt=""/>
 
-<div class="background"></div>
 
 <div class="row">
     <div class="col-75">
@@ -39,7 +38,7 @@
                             </div>
                             <div class="col-50">
                                 <label for="zip">Zip</label>
-                                <input type="text" id="zip" name="zip" placeholder="1065" autocomplete="chrome-off" required>
+                                <input type="text" id="zip" name="zip" placeholder="1065" pattern="[0-9]{4}" title="4 digit zip code" autocomplete="chrome-off" required>
                             </div>
                         </div>
                     </div>
@@ -49,8 +48,8 @@
                 <label>
                     <input type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
                 </label>
-                <input type="submit" value="Continue to Payment" class="btn payBtn">
                 <input type="button" value="Back to Shop" class="btn backBtn">
+                <input type="submit" value="Continue to Payment" class="btn payBtn">
             </form>
         </div>
     </div>

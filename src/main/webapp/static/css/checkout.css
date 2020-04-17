@@ -2,27 +2,9 @@ body {
     font-family: Arial;
     font-size: 17px;
     padding: 8px;
+    background: url("/static/img/BgLibrary.jpg") repeat-y fixed center transparent;
+    background-size: cover;
 }
-
-.background {
-    size: auto;
-    display: block;
-    alignment: center;
-}
-
-.background::after {
-    content: "";
-    background: url("/static/img/BgLibrary.jpg") center no-repeat;
-    background-size: 100%;
-    opacity: 0.8;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    position: absolute;
-    z-index: -1;
-}
-
 
 * {
     box-sizing: border-box;
@@ -58,7 +40,7 @@ body {
 }
 
 .container {
-    background-color: rgba(255,255,255,0.5);
+    background-color: rgba(255,255,255,0.8);
     padding: 5px 20px 15px 20px;
     border: 1px solid lightgrey;
     border-radius: 3px;
@@ -74,6 +56,7 @@ input[type=text] {
     border-color: blue
 }
 input:focus {
+    border-width: 2px 0 2px 0;
     border-color: lightgreen;
 }
 
@@ -111,6 +94,24 @@ img{
 
 .btn:hover {
     background-color: #45a049;
+}
+
+.backBtn {
+    background-color: sienna;
+    color: white;
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    width: 49%;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 17px;
+    display: inline-block;
+    text-align: center;
+}
+
+.backBtn:hover {
+    background-color: saddlebrown;
 }
 
 a {

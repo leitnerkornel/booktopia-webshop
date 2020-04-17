@@ -1,3 +1,7 @@
+body {
+    background: url("/static/img/BgLibrary.jpg") repeat-y fixed center transparent;
+    background-size: cover;
+}
 .glyphicon {
     margin-right: 5px;
 }
@@ -74,6 +78,7 @@
 .card {
     margin: 15px;
     border: none;
+    background-color: rgba(255,255,255,0.8);
 }
 
 .card-header {
@@ -347,5 +352,8 @@ h5 {
     text-align: center;
     font-style: italic;
 }
+
+
+
 
 
