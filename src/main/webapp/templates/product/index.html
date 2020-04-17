@@ -122,7 +122,7 @@
                                 <div class="cart-action-buttons-container">
                                     <button class="cart-increase-button">+</button>
                                     <button class="cart-decrease-button">-</button>
-                                    <button class="cart-delete-button">x</button>
+                                    <button class="cart-delete-button" th:attr="data-cartidcart=${cartItem.getId()}">x</button>
                                 </div>
                             </div>
                         </th:block>

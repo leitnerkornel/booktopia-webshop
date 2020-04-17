@@ -1,4 +1,4 @@
-import {postData} from "./data_manager.js";
+import {dataManager} from "./data_manager.js";
 
 export let shoppingCart = {
     addToCart: function (bookID, author, title, price) {
@@ -6,7 +6,7 @@ export let shoppingCart = {
         shoppingCart.showInCart(bookID, author, title, price);
         shoppingCart.changeCartColor(currentValue);
         let item = {id: bookID, author: author, title: title, price: price};
-        postData("/shoppingCart", item);
+        dataManager.postData("/shoppingCart", item);
     },
     increaseCartNumber: function () {
         let counter = document.querySelector("#lblCartCount");
@@ -46,6 +46,15 @@ export let shoppingCart = {
         }
     },
     addNewItemIntoCart: function (cart, bookID, author, title, price) {
+        let cartIds = [];
+        let cartItems = document.querySelectorAll(".cart-delete-button");
+        for (let cartItem of cartItems) {
+            console.log(cartItem.dataset.cartidcart);
+            cartIds.push(parseInt(cartItem.dataset.cartidcart));
+            console.log(cartItem.dataset.cartidcart);
+        }
+        let newCartId =Math.max(...cartIds) + 1;
+
         let newDiv = document.createElement("div");
         let newCover = document.createElement("img");
         let newAuthorTitle = document.createElement("div");
@@ -83,11 +92,19 @@ export let shoppingCart = {
         decreaseButton.innerHTML = "-";
         removeRowButton.innerHTML = "x";
 
+        removeRowButton.dataset.cartidcart = newCartId.toString();
+
         authorP.classList.add("author-in-cart");
         titleP.classList.add("title-in-cart");
         newPrice.classList.add("price-in-cart");
         newCount.classList.add("count-in-cart");
         newSubTotal.classList.add("subtotal-in-cart");
+
+        removeRowButton.addEventListener('click', function () {
+            let item = {id: bookID, author: author, title: title, price: price};
+            dataManager.postData("/deleteOneEntryFromShoppingCart", item);
+            removeRowButton.parentElement.parentElement.remove();
+        });
 
         newAuthorTitle.appendChild(authorP);
         newAuthorTitle.appendChild(titleP);
@@ -141,8 +158,19 @@ export let shoppingCart = {
         let currentValue = parseInt(counter.innerHTML);
         shoppingCart.changeCartColor(currentValue);
     },
+    deleteEntryFromCart: function () {
+        let deleteButtons = document.querySelectorAll(".cart-delete-button");
+        for (let deleteButton of deleteButtons) {
+            deleteButton.addEventListener('click', function () {
+                let item = {id: deleteButton.dataset.cartidcart};
+                dataManager.postData("/deleteOneEntryFromShoppingCart", item);
+                deleteButton.parentElement.parentElement.remove();
+            });
+        }
+    },
     shoppingCartMain: function () {
         shoppingCart.setCartColorAtStart();
+        shoppingCart.deleteEntryFromCart();
         let buttons = document.querySelectorAll(".add-to-cart");
         for (let button of buttons) {
             let bookID = button.dataset.bookid;

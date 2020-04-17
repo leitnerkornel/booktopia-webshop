@@ -396,4 +396,9 @@ h5 {
     font-weight: bolder;
 }
 
+button:focus {
+    outline: 0;
+}
+
+
 

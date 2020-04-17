@@ -1,5 +1,22 @@
 package com.codecool.shop.controller;
 
+import com.codecool.shop.dao.DataSourceException;
+import com.codecool.shop.dao.implementation.CartDaoJdbc;
+import com.codecool.shop.json.CartDataContainer;
+import com.codecool.shop.json.CartEntryContainer;
+import com.codecool.shop.model.CartItem;
+import com.google.gson.Gson;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.stream.Collectors;
+
+
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.DataSourceException;
 import com.codecool.shop.dao.implementation.CartDaoJdbc;
@@ -21,32 +38,28 @@ import java.util.stream.Collectors;
 
 import com.google.gson.Gson;
 
-@WebServlet(urlPatterns = {"/shoppingCart"})
-public class CartController extends HttpServlet {
+
+@WebServlet(urlPatterns = {"/deleteOneEntryFromShoppingCart"})
+public class DeleteEntryFromCart extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-
         String param = req.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
-        CartDataContainer cartDataContainer = new Gson().fromJson(param, CartDataContainer.class);
-        int bookId = Integer.parseInt(cartDataContainer.getId());
-        String author = cartDataContainer.getAuthor();
-        String title = cartDataContainer.getTitle();
-        String price = cartDataContainer.getPrice();
-        System.out.println(bookId + author + title + price);
+        CartEntryContainer cartEntryContainer = new Gson().fromJson(param, CartEntryContainer.class);
+        int cartID = cartEntryContainer.getIdAsNumber();
+
+        System.out.println(cartID);
 
         CartDaoJdbc cartDataStoreDB = CartDaoJdbc.getInstance();
-        CartItem cartItem = new CartItem(bookId);
 
         try {
-            cartDataStoreDB.add(cartItem);
+            cartDataStoreDB.removeItemById(cartID);
         } catch (DataSourceException e) {
-            System.err.println("Couldn't add new cart entry.");
+            System.err.println("Couldn't delete entry with this cart ID: " + cartID);
             System.exit(1);
         }
 
-        String responseJSON = new Gson().toJson("Adding was successful.");
+        String responseJSON = new Gson().toJson("Was success from deleteEntry");
 
         PrintWriter out = resp.getWriter();
         resp.setContentType("application/json");
@@ -66,4 +79,10 @@ public class CartController extends HttpServlet {
         //engine.process("product/index.html", context, resp.getWriter());
     }
 }
+
+
+
+
+
+
 

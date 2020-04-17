@@ -61,7 +61,7 @@ public class CartDaoJdbc implements CartDao {
     }
 
     @Override
-    public int itemsInCart() throws DataSourceException{
+    public int itemsInCart() throws DataSourceException {
         int itemsInCart = 0;
         Connection cursor = SQLConnection.getDb();
 
@@ -79,8 +79,40 @@ public class CartDaoJdbc implements CartDao {
     }
 
     @Override
-    public void removeItemById(int id) {
+    public void removeItemById(int id) throws DataSourceException {
+        String deleteQuery = "DELETE FROM cart\n" +
+                "WHERE id = ?;";
 
+        try (Connection cursor = SQLConnection.getDb();
+             PreparedStatement prepUpdate =
+                     cursor.prepareStatement(deleteQuery,
+                             ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE)
+        ) {
+            prepUpdate.setInt(1, id);
+            prepUpdate.execute();
+
+        } catch (SQLException e) {
+            throw new DataSourceException(e);
+        }
+    }
+
+    @Override
+    public int getCartIdByBookId(int id) throws DataSourceException {
+        int cartId = 0;
+        Connection cursor = SQLConnection.getDb();
+        String query = "SELECT id AS cart_id FROM cart WHERE book_id = ?;";
+
+        try (PreparedStatement prepQuery = cursor.prepareStatement(query,
+                ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE)) {
+            prepQuery.setInt(1, id);
+            ResultSet rs = prepQuery.executeQuery();
+            while (rs.next()) {
+                cartId = rs.getInt("cart_id");
+            }
+        } catch (SQLException e) {
+            throw new DataSourceException(e);
+        }
+        return cartId;
     }
 
     @Override
