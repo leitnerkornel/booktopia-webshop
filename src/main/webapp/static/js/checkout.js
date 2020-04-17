@@ -22,11 +22,13 @@ function backToMain() {
 function toPayment() {
     let payButton = document.querySelector(".payBtn");
     payButton.addEventListener("click", function () {
+        window.location = "/payment";
         let form = document.querySelector("form");
-        if (checkForm(form) === true){
-            window.location = "/payment";
+        /*if (checkForm(form)){
+            console.log("Redirect payment")
         } else {
-        }
+            console.log("Not redirect to payment")
+        }*/
     })
 }
 
