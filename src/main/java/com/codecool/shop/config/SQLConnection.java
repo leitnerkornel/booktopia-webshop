@@ -1,7 +1,9 @@
 package com.codecool.shop.config;
 
 
+import java.io.FileReader;
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
@@ -21,13 +23,50 @@ public class SQLConnection {
     }
 
     private void connectToDb () {
-        Properties property = new Properties();
+        /*Properties property = new Properties();
         property.setProperty("user", user);
         property.setProperty("password", password);
         try {
             cursor = DriverManager.getConnection(url, property);
         } catch (SQLException e) {
             e.printStackTrace();
+        }*/
+        try
+        {
+            Properties props = new Properties();
+
+            String dbSettingsPropertyFile = "src/main/resources/connection.properties";
+            FileReader fReader = new FileReader(dbSettingsPropertyFile);
+
+            props.load(fReader);
+
+            String dbDriverClass = props.getProperty("db.driver.class");
+
+            String url = props.getProperty("url");
+
+            String dbUserName = props.getProperty("user");
+
+            String dbPassword = props.getProperty("password");
+
+            if(!"".equals(dbDriverClass) && !"".equals(url))
+            {
+                Class.forName(dbDriverClass);
+
+                Connection dbConn = DriverManager.getConnection(url, dbUserName, dbPassword);
+
+                Properties property = new Properties();
+                property.setProperty("user", user);
+                property.setProperty("password", password);
+                try {
+                    cursor = DriverManager.getConnection(url, property);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }catch(Exception ex)
+        {
+            ex.printStackTrace();
         }
     }
 

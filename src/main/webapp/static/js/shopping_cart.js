@@ -1,5 +1,18 @@
 import {dataManager} from "./data_manager.js";
 
+function continueToCheckout() {
+    let checkoutButton = document.querySelector(".checkout-cart");
+    let cartWithBook = document.querySelector(".cart-color-change");
+    checkoutButton.addEventListener("click", function () {
+        cartWithBook = document.querySelector(".cart-color-change");
+        if (cartWithBook === null) {
+            alert("You have to choose a book first");
+        } else {
+            window.location = "/checkout";
+        }
+    })
+}
+
 export let shoppingCart = {
     addToCart: function (bookID, author, title, price) {
         let currentValue = shoppingCart.increaseCartNumber();
@@ -169,6 +182,7 @@ export let shoppingCart = {
         }
     },
     shoppingCartMain: function () {
+        continueToCheckout();
         shoppingCart.setCartColorAtStart();
         shoppingCart.deleteEntryFromCart();
         let buttons = document.querySelectorAll(".add-to-cart");
