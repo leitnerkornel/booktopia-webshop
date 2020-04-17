@@ -27,8 +27,10 @@ export let shoppingCart = {
         let currentValue = parseInt(counter.innerHTML);
         if (currentValue === 0) {
             let cart = document.querySelector(".items-in-cart");
-            cart.querySelector(".empty-cart-text").remove();
-            shoppingCart.createCartHeader(cart);
+            if (cart.querySelector(".empty-cart-text") !== null) {
+                cart.querySelector(".empty-cart-text").remove();
+                shoppingCart.createCartHeader(cart);
+            }
         }
         currentValue += 1;
         counter.innerHTML = currentValue.toString();
@@ -45,11 +47,12 @@ export let shoppingCart = {
             for (let item of cartItems) {
                 if (item.dataset.bookidcart === bookID) {
                     let currentItemQuantity = item.querySelector(".count-in-cart");
-                    let currentItemPrice = currentItemQuantity.previousSibling;
+                    let currentItemSubtotal = item.querySelector(".subtotal-in-cart");
+                    console.log(currentItemSubtotal);
                     let currentQuantity = parseInt(currentItemQuantity.innerHTML);
                     let defaultPrice = parseFloat(price.split(" ")[0]);
                     currentItemQuantity.innerHTML = (currentQuantity + 1).toString();
-                    currentItemPrice.innerHTML = (defaultPrice * (currentQuantity + 1)).toString() + " USD";
+                    currentItemSubtotal.innerHTML = (defaultPrice * (currentQuantity + 1)).toString() + " USD";
                 }
             }
         } else {
@@ -64,6 +67,12 @@ export let shoppingCart = {
         let titleP = document.createElement("p");
         let newPrice = document.createElement("div");
         let newCount = document.createElement("div");
+        let newSubTotal = document.createElement("div");
+        let newButtons = document.createElement("div");
+
+        let increaseButton = document.createElement("button");
+        let decreaseButton = document.createElement("button");
+        let removeRowButton = document.createElement("button");
 
         newDiv.classList.add("item-div");
         newDiv.dataset.bookidcart = bookID;
@@ -72,24 +81,41 @@ export let shoppingCart = {
         newCover.classList.add("cover-cart");
 
         newAuthorTitle.classList.add("author-title-cart");
+        newButtons.classList.add("cart-action-buttons-container");
 
         authorP.innerHTML = `${author}`;
         titleP.innerHTML = `${title}`;
         newPrice.innerHTML = `${price}`;
         newCount.innerHTML = "1";
+        newSubTotal.innerHTML = `${price}`;
+
+        increaseButton.classList.add("cart-increase-button");
+        decreaseButton.classList.add("cart-decrease-button");
+        removeRowButton.classList.add("cart-delete-button");
+
+        increaseButton.innerHTML = "+";
+        decreaseButton.innerHTML = "-";
+        removeRowButton.innerHTML = "X";
 
         authorP.classList.add("author-in-cart");
         titleP.classList.add("title-in-cart");
         newPrice.classList.add("price-in-cart");
         newCount.classList.add("count-in-cart");
+        newSubTotal.classList.add("subtotal-in-cart");
 
         newAuthorTitle.appendChild(authorP);
         newAuthorTitle.appendChild(titleP);
+
+        newButtons.appendChild(increaseButton);
+        newButtons.appendChild(decreaseButton);
+        newButtons.appendChild(removeRowButton);
 
         newDiv.appendChild(newCover);
         newDiv.appendChild(newAuthorTitle);
         newDiv.appendChild(newPrice);
         newDiv.appendChild(newCount);
+        newDiv.appendChild(newSubTotal);
+        newDiv.appendChild(newButtons);
         cart.appendChild(newDiv);
     },
     createCartHeader: function (cart) {
@@ -97,19 +123,23 @@ export let shoppingCart = {
         let productHeader = document.createElement("div");
         let priceHeader = document.createElement("div");
         let quantityHeader = document.createElement("div");
+        let subtotalHeader = document.createElement("div");
 
         newDiv.classList.add("cart-header-container");
         productHeader.classList.add("cart-product-header");
         priceHeader.classList.add("cart-price-header");
         quantityHeader.classList.add("cart-quantity-header");
+        subtotalHeader.classList.add("cart-subtotal-header");
 
         productHeader.innerHTML = "Product";
         priceHeader.innerHTML = "Price";
         quantityHeader.innerHTML = "Quantity";
+        subtotalHeader.innerHTML = "Subtotal";
 
         newDiv.appendChild(productHeader);
         newDiv.appendChild(priceHeader);
         newDiv.appendChild(quantityHeader);
+        newDiv.appendChild(subtotalHeader);
         cart.appendChild(newDiv);
     },
     changeCartColor: function (value) {
@@ -120,8 +150,13 @@ export let shoppingCart = {
             cartIcon.classList.remove('cart-color-change');
         }
     },
+    setCartColorAtStart: function () {
+        let counter = document.querySelector("#lblCartCount");
+        let currentValue = parseInt(counter.innerHTML);
+        shoppingCart.changeCartColor(currentValue);
+    },
     shoppingCartMain: function () {
-        continueToCheckout();
+        shoppingCart.setCartColorAtStart();
         let buttons = document.querySelectorAll(".add-to-cart");
         for (let button of buttons) {
             let bookID = button.dataset.bookid;

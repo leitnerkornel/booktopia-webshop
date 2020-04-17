@@ -32,6 +32,7 @@ public class Initializer implements ServletContextListener {
         RecommenderDao supplierDataStoreDB = RecommenderDaoJdbc.getInstance();
 
 
+
         //setting up a new Recommender
         Recommender peti = new Recommender("Peti");
         supplierDataStoreDB.add(peti);

@@ -80,7 +80,7 @@
         </ul>
         <div class="cart-container">
             <i class="fas fa-shopping-cart fa-2x" data-toggle="modal" data-target="#cartModal"></i>
-            <span class='badge badge-warning' id='lblCartCount' data-toggle="modal" data-target="#cartModal"> 0 </span>
+            <span class='badge badge-warning' id='lblCartCount' data-toggle="modal" data-target="#cartModal" th:text="${cartItemCounter}"> Cart Item Counter </span>
         </div>
         <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -100,10 +100,35 @@
                 </button>
             </div>
             <div class="modal-body items-in-cart">
-                <p class="empty-cart-text">Your cart is empty!</p>
+                <th:block th:switch="${cartItems.size()}">
+                    <p th:case="0" class="empty-cart-text">Your cart is empty!</p>
+                    <th:block th:case="*">
+                        <div class="cart-header-container">
+                            <div class="cart-product-header">Product</div>
+                            <div class="cart-price-header">Price</div>
+                            <div class="cart-quantity-header">Quantity</div>
+                            <div class="cart-subtotal-header">Subtotal</div>
+                        </div>
+                        <th:block th:each="cartItem, iterStat : ${cartItems}">
+                            <div class="item-div" th:attr="data-bookidcart=${cartItem.getBookID()}">
+                                <img class="cover-cart" src="http://placehold.it/400x250/000/fff"
+                                     th:attr="src='/static/img/product_' + ${cartItem.getBookID()} + '.jpg'" alt=""/>
+                                <div class="author-title-cart">
+                                    <p class="author-in-cart" th:text="${cartItem.getAuthorName()}">Author</p>
+                                    <p class="title-in-cart" th:text="${cartItem.getTitle()}"></p>
+                                </div>
+                                <div class="price-in-cart" th:text="${#numbers.formatDecimal(cartItem.getPrice(), 0, 2)} + ' USD'">Price</div>
+                                <div class="count-in-cart" th:text="${cartItem.getQuantity()}">Quantity</div>
+                                <div class="subtotal-in-cart" th:text="${#numbers.formatDecimal(cartItem.getSubtotal(), 0, 2)} + ' USD'">Subtotal</div>
+                            </div>
+                        </th:block>
+                    </th:block>
+                </th:block>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-info continue-shopping-cart" data-dismiss="modal">Continue shopping</button>
+                <button type="button" class="btn btn-info continue-shopping-cart" data-dismiss="modal">Continue
+                    shopping
+                </button>
                 <button type="button" class="btn btn-success checkout-cart">Checkout</button>
             </div>
         </div>
@@ -113,7 +138,8 @@
 <div class="container">
     <div id="products" class="row">
         <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">
-            <div class="card not-selected" th:attr="class='card ' + ${prod.getRecommenderName()} + ' ' + ${prod.getGenreName()}">
+            <div class="card not-selected"
+                 th:attr="class='card ' + ${prod.getRecommenderName()} + ' ' + ${prod.getGenreName()}">
                 <img class="book-image" src="http://placehold.it/400x250/000/fff"
                      th:attr="src='/static/img/product_' + ${prod.getBookID()} + '.jpg'" alt=""/>
                 <div class="card-header">
@@ -130,7 +156,9 @@
                         <p class="price-text" th:text="${prod.getPrice()}">100 USD</p>
                     </div>
                     <div class="card-text">
-                        <a class="btn btn-success add-to-cart" th:attr="data-bookid=${prod.getBookID()},data-author=${prod.getAuthorName()},data-title=${prod.getName()},data-price=${prod.getPrice()}">Add to cart</a>
+                        <a class="btn btn-success add-to-cart"
+                           th:attr="data-bookid=${prod.getBookID()},data-author=${prod.getAuthorName()},data-title=${prod.getName()},data-price=${prod.getPrice()}">Add
+                            to cart</a>
                     </div>
                 </div>
             </div>
