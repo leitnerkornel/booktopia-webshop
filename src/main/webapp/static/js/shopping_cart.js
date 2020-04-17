@@ -3,10 +3,9 @@ import {postData} from "./data_manager.js";
 function continueToCheckout() {
     let checkoutButton = document.querySelector(".checkout-cart");
     let cartWithBook = document.querySelector(".cart-color-change");
-    console.log(cartWithBook);
     checkoutButton.addEventListener("click", function () {
-        console.log(cartWithBook + "after");
-        if (cartWithBook == null) {
+        cartWithBook = document.querySelector(".cart-color-change");
+        if (cartWithBook === null) {
             alert("You have to choose a book first");
         } else {
             window.location = "/checkout";
@@ -156,6 +155,7 @@ export let shoppingCart = {
         shoppingCart.changeCartColor(currentValue);
     },
     shoppingCartMain: function () {
+        continueToCheckout();
         shoppingCart.setCartColorAtStart();
         let buttons = document.querySelectorAll(".add-to-cart");
         for (let button of buttons) {
